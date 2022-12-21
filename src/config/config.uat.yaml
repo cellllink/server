@@ -1,0 +1,15 @@
+mode: uat
+
+http:
+  host: 'localhost'
+  port: 8080
+
+db:
+  mysql:
+    host: 'xxx.xx.xxx.x'
+    port: 3306
+    username:
+    password:
+    database:
+
+  mongoose: 'mongodb://care:care@115.29.243.9/cell'
