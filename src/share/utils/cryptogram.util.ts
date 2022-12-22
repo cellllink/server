@@ -6,13 +6,9 @@ export function makeSalt(): string {
 }
 
 // 使用盐加密明文密码
-export function encryptPassword(password: string, salt: string): string {
-  if (!password || !salt) {
-    return '';
-  }
-  const tempSalt = Buffer.from(salt, 'base64');
-  return (
-    // 10000 代表迭代次数 16代表长度
-    crypto.pbkdf2Sync(password, tempSalt, 10000, 16, 'sha1').toString('base64')
-  );
+export function encryptPasswordBySalt(password: string, salt: string): string {
+  // 10000 代表迭代次数 16代表长度
+  return crypto
+    .pbkdf2Sync(password, Buffer.from(salt, 'base64'), 10000, 24, 'sha1')
+    .toString('base64');
 }

@@ -1,15 +1,15 @@
 import { Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { TeamService } from './team.service';
+// import { TeamService } from './team.service';
 
 @ApiTags('api/team')
 @Controller('api/team')
 export class TeamController {
-  constructor(private teamService: TeamService) {
-    // 用户状态 同组织
-    // 99 删除
-    // x 待审核
-  }
+  // constructor(private teamService: TeamService) {
+  //   // 用户状态 同组织
+  //   // 99 删除
+  //   // x 待审核
+  // }
 
   // 创建团队
   @Post('create')

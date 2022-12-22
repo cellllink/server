@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { DaoService } from 'src/daos';
+import { DaoService } from 'cell-database';
 import {
   OrganizationCreateDto,
   OrganizationInfoEditDto,
   OrganizationAddOrRemoveMemberDto,
 } from './organization.dto';
-import { User } from 'src/daos/entities';
+import { User } from 'cell-database/entities';
 
 @Injectable()
 export class OrganizationService {
@@ -17,16 +17,16 @@ export class OrganizationService {
   async create(organizationCreateDto: OrganizationCreateDto, user?: User) {
     user = user || (await this.dao.user.findOneById(organizationCreateDto.owner_id));
 
-    const organization = await this.dao.organization.createOrganization({
-      owner_id: user.id,
-      name: user.name + '的组织',
-      logo: this.defaultOrganizationLogo,
-    });
+    // const organization = await this.dao.organization.createOrganization({
+    //   owner_id: user.id,
+    //   name: user.name + '的组织',
+    //   logo: this.defaultOrganizationLogo,
+    // });
 
-    await this.dao.organization.linkOrganizationUser({
-      organization_id: organization.id,
-      user_id: user.id,
-    });
+    // await this.dao.organization.linkOrganizationUser({
+    //   organization_id: organization.id,
+    //   user_id: user.id,
+    // });
   }
 
   async info(organization_id: number) {
