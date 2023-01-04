@@ -1,15 +1,18 @@
+# 模式
 mode: development
 
+# 服务启动地址
 http:
-  host: 'localhost'
-  port: 8080
+  host: localhost
+  port: 3000
 
+# 数据库
 db:
   mysql:
-    host: 'xxx.xx.xxx.x'
+    host: xxx.xx.xxx.x
     port: 3306
-    username: 'root'
-    password: 'care'
-    database: 'cell'
+    username: xxxx
+    password: xxxx
+    database: xxxx
 
-  mongoose: 'mongodb://care:care@115.29.243.9/cell'
+  mongoose: mongodb://care:care@xxx.xx.xxx.x/xxxx

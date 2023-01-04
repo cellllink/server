@@ -37,6 +37,7 @@ import { CommonServiceModule } from './share/services';
     }),
 
     CommonServiceModule,
+
     AllModule,
   ],
   controllers: [],

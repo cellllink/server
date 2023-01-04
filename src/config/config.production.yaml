@@ -1,15 +1,18 @@
+# 模式
 mode: production
 
+# 服务启动地址
 http:
-  host: 'localhost'
-  port: 8080
+  host: localhost
+  port: 3000
 
+# 数据库
 db:
   mysql:
-    host: 'xxx.xx.xxx.x'
+    host: 115.29.243.9
     port: 3306
-    username:
-    password:
-    database:
+    username: root
+    password: care
+    database: cellink
 
-  mongoose: 'mongodb://care:care@115.29.243.9/cell'
+  mongoose: mongodb://care:care@115.29.243.9/cell

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { DaoModule } from 'cell-database';
+import { DaoModule } from '@cellink/database/daos';
 // import { AuthModule } from './common/auth/auth.module';
 
 // common 模块 controller service
-import { UserController, JwtStrategy } from './user';
-import { OrganizationController } from './organization';
+// import { UserController, JwtStrategy } from './user';
+// import { OrganizationController } from './organization';
 // import { ApplicationController } from './application';
 import { TeamController } from './team';
 
@@ -16,11 +16,12 @@ import { TeamController } from './team';
 // 业务app 模块 controller service
 // import { DefctController, DefctService } from './app/defect';
 
-const Strategies = [JwtStrategy];
+const Strategies = [];
+// const Strategies = [JwtStrategy];
 
 const CommonControllers = [
-  UserController,
-  OrganizationController,
+  // UserController,
+  // OrganizationController,
   TeamController,
   // ApplicationController,
 ];
