@@ -9,6 +9,7 @@
 
 # environments
 src/config/config.development.yaml
+src/plugins
 
 # tempEntities
 src/daos/tempEntities

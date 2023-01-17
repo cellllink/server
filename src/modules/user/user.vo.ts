@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserPo } from '@cellink/transfer/services/user/user.po';
+import { UserPo } from '@cellink/database/pos';
 
 export class LoginVo {
   @ApiProperty({

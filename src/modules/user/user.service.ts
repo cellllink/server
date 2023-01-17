@@ -12,6 +12,7 @@ import {
   InfoEditDto,
   LoginDto,
   RegisterDto,
+  RegisterVo,
   userUrl,
 } from '@cellink/transfer/services';
 
@@ -25,10 +26,11 @@ export class UserService {
 
   async main() {}
 
-  async register(dto: RegisterDto) {
+  async register(dto: RegisterDto): Promise<RegisterVo> {
     // 注冊用戶
     const { account, password } = dto;
     // 生成默认的组织
+    return {};
   }
 
   async login(dto: LoginDto) {}

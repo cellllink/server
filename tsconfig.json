@@ -18,16 +18,16 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@cellink/database/*": ["../database/*"],
-      "@cellink/transfer/*": ["../transfer/*"]
+      "@cellink/database/*": ["./src/plugins/database/*"],
+      "@cellink/transfer/*": ["./src/plugins/transfer/*"]
     }
   },
   "references": [
     {
-      "path": "../database"
+      "path": "./src/plugins/database"
     },
     {
-      "path": "../transfer"
+      "path": "./src/plugins/transfer"
     }
   ]
 }

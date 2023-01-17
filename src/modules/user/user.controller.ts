@@ -17,38 +17,38 @@ import { UserService } from './user.service';
 
 @ApiTags(userUrl.tag)
 @Controller(userUrl.commonPrefix)
-export class UserAccountController {
+export class UserController {
   constructor(private userService: UserService) {
     this.main();
   }
 
   async main() {}
 
-  @Post('register')
+  @Post(userUrl.register)
   @ApiBody({ type: RegisterDto })
   async register(@Body() dto: RegisterDto) {
     return this.userService.register(dto);
   }
 
-  @Post('login')
+  @Post(userUrl.login)
   @ApiBody({ type: LoginDto })
   async login(@Body() dto: RegisterDto) {
     return this.userService.login(dto);
   }
 
-  @Post('forgetPassword')
+  @Post(userUrl.forgetPassword)
   @ApiBody({ type: LoginDto })
   async forgetPassword(@Body() dto: ForgetPasswordDto) {
     return this.userService.forgetPassword(dto);
   }
 
-  @Post('info')
+  @Post(userUrl.info)
   @ApiBody({ type: InfoDto })
   async info(@Body() dto: InfoDto) {
     return this.userService.info(dto);
   }
 
-  @Post('infoEdit')
+  @Post(userUrl.infoEdit)
   @ApiBody({ type: InfoEditDto })
   async infoEdit(@Body() dto: InfoEditDto) {
     return this.userService.infoEdit(dto);
@@ -116,5 +116,3 @@ export class UserAccountController {
   //   return this.userService.listOfTeam(team_id);
   // }
 }
-
-export const UserControllers = [UserAccountController];
