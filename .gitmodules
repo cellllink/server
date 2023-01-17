@@ -1,0 +1,6 @@
+[submodule "src/plugins/database"]
+	path = src/plugins/database
+	url = https://gitee.com/cellink/database.git
+[submodule "src/plugins/transfer"]
+	path = src/plugins/transfer
+	url = https://gitee.com/cellink/transfer.git
