@@ -10,11 +10,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService, TypeOrmConfigService } from './share/services';
 
 // 业务 modules
-import { AllModule } from './modules/all.module';
-import { CommonServiceModule } from './share/services';
+import { ShareModule } from './share/share.module';
+import { ApiModule } from './api/api.module';
 
 @Module({
   imports: [
+    // 环境变量 配置文件
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
@@ -22,25 +23,30 @@ import { CommonServiceModule } from './share/services';
       load: [configuration],
     }),
 
+    // 静态资源配置
+    // TODO 此处配置还有问题
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'static'),
+      rootPath: join(__dirname, './static'),
       serveRoot: 'static/',
-      // exclude: ['/api*']
+      // exclude: ['/api*'],
     }),
 
+    // 数据库 Mysql 配置
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
     }),
 
+    // 数据库 Mongoose 配置
     MongooseModule.forRootAsync({
       useClass: MongooseConfigService,
     }),
 
-    CommonServiceModule,
+    // 共享模块
+    ShareModule,
 
-    AllModule,
+    // 业务模块
+    ApiModule,
   ],
-  controllers: [],
   providers: [],
 })
 export class AppModule {}
