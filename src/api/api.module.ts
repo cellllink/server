@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { DaoModule } from 'packages/dao/dao.module';
-import { Controllers } from './core';
+import { BusinessControllers, BusinessServices } from './business';
+import { CoreControllers, CoreServices } from './core';
 
 @Module({
   imports: [DaoModule],
-  controllers: [...Controllers],
-  providers: [],
+  controllers: [...CoreControllers, ...BusinessControllers],
+  providers: [...CoreServices, ...BusinessServices],
 })
 export class ApiModule {}
