@@ -20,3 +20,31 @@ export class TeamCreateDto {
   @IsNotEmpty()
   organization_id: number;
 }
+
+export class TeamMemberAddDto {
+  @ApiProperty({
+    description: '团队id',
+  })
+  @IsNotEmpty()
+  team_id: number;
+
+  @ApiProperty({
+    description: '所有者id',
+  })
+  @IsNotEmpty()
+  user_id: number;
+}
+
+export class TeamMemberRemoveDto {
+  @ApiProperty({
+    description: '团队id',
+  })
+  @IsNotEmpty()
+  team_id: number;
+
+  @ApiProperty({
+    description: '所有者id',
+  })
+  @IsNotEmpty()
+  user_id: number;
+}

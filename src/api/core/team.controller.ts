@@ -3,14 +3,18 @@ import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
 import { TeamPo, UserPo } from 'packages/database/po/core';
 import { BaseException } from 'src/share/httpException';
-import { TeamCreateDto } from './team.dto';
+import { TeamCreateDto, TeamMemberAddDto, TeamMemberRemoveDto } from './team.dto';
 
 @ApiTags('CoreTeam')
 @Controller('/api/core/team')
 export class TeamController {
   constructor(private coreDaoServcie: CoreDaoServcie) {}
 
-  // 创建
+  /**
+   * 创建团队
+   * @param dto
+   * @returns
+   */
   @Post('create')
   @ApiBody({ type: TeamCreateDto })
   async register(@Body() dto: TeamCreateDto): Promise<string> {
@@ -29,7 +33,11 @@ export class TeamController {
     return '创建成功';
   }
 
-  // 团队信息
+  /**
+   * 团队信息
+   * @param id
+   * @returns
+   */
   @Post('info/:teamId')
   async info(@Param('teamId') id: number): Promise<TeamPo> {
     const team = await this.coreDaoServcie.findTeamById(id);
@@ -39,26 +47,68 @@ export class TeamController {
     return team;
   }
 
-  // 团队信息编辑
-  // @Post('info/edit')
+  /**
+   * 团队信息编辑
+   * @param dto
+   * @returns
+   */
+  @Post('info/edit')
+  async infoEdit(@Body() dto: Partial<UserPo>): Promise<string> {
+    const team = await this.coreDaoServcie.findTeamById(dto.id);
 
-  // 添加成员
+    if (!team) throw new BaseException('该团队不存在');
+
+    await this.coreDaoServcie.repository.team.save({
+      ...team,
+      ...dto,
+    });
+
+    return '编辑成功';
+  }
+
+  /**
+   * 添加成员
+   * @param dto
+   * @returns
+   */
   @Post('member/add')
-  @ApiBody({ type: TeamCreateDto })
-  async memberAdd(@Body() dto: TeamCreateDto): Promise<string> {
-    // TODO
-    return '编辑成功';
+  @ApiBody({ type: TeamMemberAddDto })
+  async memberAdd(@Body() dto: TeamMemberAddDto): Promise<string> {
+    const { team_id, user_id } = dto;
+
+    const teamUser = this.coreDaoServcie.findTeamUser(team_id, user_id);
+
+    if (teamUser) throw new BaseException('该成员已在团队中');
+
+    await this.coreDaoServcie.repository.teamUser.save({ team_id, user_id });
+
+    return '添加成功';
   }
 
-  // 添加成员
+  /**
+   * 移出成员
+   * @param dto
+   * @returns
+   */
   @Post('member/remove')
-  @ApiBody({ type: TeamCreateDto })
-  async memberRemove(@Body() dto: TeamCreateDto): Promise<string> {
-    // TODO
-    return '编辑成功';
+  @ApiBody({ type: TeamMemberRemoveDto })
+  async memberRemove(@Body() dto: TeamMemberRemoveDto): Promise<string> {
+    const { user_id, team_id } = dto;
+
+    const teamUser = await this.coreDaoServcie.findTeamUser(team_id, user_id);
+
+    if (!teamUser) throw new BaseException('该成员已不在团队中');
+
+    await this.coreDaoServcie.repository.teamUser.remove(teamUser);
+
+    return '移出成功';
   }
 
-  // 成员列表
+  /**
+   * 成员列表
+   * @param id
+   * @returns
+   */
   @Post('members/:teamId')
   async members(@Param('teamId') id: number): Promise<UserPo[]> {
     return await this.coreDaoServcie.findTeamUsers(id);

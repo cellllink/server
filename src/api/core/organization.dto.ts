@@ -15,4 +15,30 @@ export class OrganizationCreateDto {
   user_id: number;
 }
 
-export class OrganizationEditDto {}
+export class OrganizationInviteDto {
+  @ApiProperty({
+    description: '组织id',
+  })
+  @IsNotEmpty()
+  organization_id: number;
+
+  @ApiProperty({
+    description: '用户id',
+  })
+  @IsNotEmpty()
+  user_id: number;
+}
+
+export class OrganizationDimissionDto {
+  @ApiProperty({
+    description: '组织id',
+  })
+  @IsNotEmpty()
+  organization_id: number;
+
+  @ApiProperty({
+    description: '用户id',
+  })
+  @IsNotEmpty()
+  user_id: number;
+}

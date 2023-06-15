@@ -1,7 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
-import { UserPo } from 'packages/database/po/core';
 import { BaseException } from 'src/share/httpException';
 import { encryptPasswordBySalt, makeSalt } from 'src/share/utils';
 import { AuthRegisterDto, AuthLoginDto } from './auth.dto';

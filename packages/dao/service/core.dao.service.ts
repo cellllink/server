@@ -1,5 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { OrganizationPo, TeamPo, UserPo } from 'packages/database/po/core';
+import {
+  OrganizationPo,
+  OrganizationUserPo,
+  OrganizationUserStatus,
+  TeamPo,
+  TeamUserPo,
+  UserPo,
+} from 'packages/database/po/core';
 import { CoreRepositoryService } from 'packages/database/service';
 
 @Injectable()
@@ -58,19 +65,58 @@ export class CoreDaoServcie {
     });
   }
 
-  public async findOrganizationUsers(organizationId: number): Promise<UserPo[]> {
-    const userIds = (
-      await this.repository.organizationUser.find({
-        where: { organization_id: organizationId },
-      })
-    ).map(i => i.user_id);
+  /**
+   * 默认查询在职的
+   * @param organizationId
+   * @param userId
+   * @param status
+   * @returns
+   */
+  public async findOrganizationUser(
+    organizationId: number,
+    userId: number,
+    status: number[] = [OrganizationUserStatus.onJob],
+  ): Promise<OrganizationUserPo> {
+    const where = status.map(i => ({
+      organization_id: organizationId,
+      user_id: userId,
+      status: i,
+    }));
 
-    return this.findUsersByIds(userIds);
+    return await this.repository.organizationUser.findOne({ where });
+  }
+
+  /**
+   * 默认查询在职的成员
+   * @param organizationId
+   * @param status
+   * @returns
+   */
+  public async findOrganizationUsers(
+    organizationId: number,
+    status: number[] = [OrganizationUserStatus.onJob],
+  ): Promise<UserPo[]> {
+    const where = status.map(i => ({
+      organization_id: organizationId,
+      status: i,
+    }));
+    const organizationUsers = await this.repository.organizationUser.find({ where });
+
+    return this.findUsersByIds(organizationUsers.map(i => i.user_id));
   }
 
   public async findTeamById(id: number): Promise<TeamPo> {
     return await this.repository.team.findOne({
       where: { id },
+    });
+  }
+
+  public async findTeamUser(teamId: number, userId: number): Promise<TeamUserPo> {
+    return await this.repository.teamUser.findOne({
+      where: {
+        team_id: teamId,
+        user_id: userId,
+      },
     });
   }
 

@@ -7,3 +7,18 @@ export class OrganizationPo {
   logo: string;
   create_time: string;
 }
+
+export class OrganizationUserPo {
+  organization_id: number;
+  user_id: number;
+  join_time: Date | null;
+  status: OrganizationUserStatus;
+}
+
+export enum OrganizationUserStatus {
+  invite = 0, // 邀请中
+  refuse = 1, // 已拒绝
+  onJob = 2, // 在职
+  dimission = 3, // 离职
+  delete = 99, // 已删除
+}

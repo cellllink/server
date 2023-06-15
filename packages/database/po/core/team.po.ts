@@ -8,3 +8,8 @@ export class TeamPo {
   logo: string;
   create_time: string;
 }
+
+export class TeamUserPo {
+  team_id: number;
+  user_id: number;
+}
