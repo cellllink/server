@@ -7,6 +7,8 @@ import { BaseException } from 'src/share/httpException';
 export class DefectController {
   constructor() {}
 
+  // 看一下save 方法 是不是不需要传递 所有的东西
+
   // 缺陷列表 - 支持各种筛选
   @Post('list')
   // @ApiBody({ type: OrganizationCreateDto })
