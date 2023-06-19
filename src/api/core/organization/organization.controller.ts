@@ -1,7 +1,8 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
-import { ApiBody, ApiTags, PartialType } from '@nestjs/swagger';
+import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
 import { OrganizationPo, OrganizationUserStatus, UserPo } from 'packages/database/po/core';
+import { JwtAuthGuard } from 'src/share/guide';
 import { BaseException } from 'src/share/httpException';
 import {
   OrganizationCreateDto,
@@ -10,6 +11,7 @@ import {
 } from './organization.dto';
 
 @ApiTags('CoreOrganization')
+@UseGuards(JwtAuthGuard)
 @Controller('/api/core/organization')
 export class OrganizationController {
   constructor(private coreDaoServcie: CoreDaoServcie) {}

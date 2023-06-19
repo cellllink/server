@@ -1,1 +1,1 @@
-export * from './auth.guide';
+export * from './jwt.guide';

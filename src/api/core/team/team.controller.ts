@@ -1,11 +1,13 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
 import { TeamPo, UserPo } from 'packages/database/po/core';
+import { JwtAuthGuard } from 'src/share/guide';
 import { BaseException } from 'src/share/httpException';
 import { TeamCreateDto, TeamMemberAddDto, TeamMemberRemoveDto } from './team.dto';
 
 @ApiTags('CoreTeam')
+@UseGuards(JwtAuthGuard)
 @Controller('/api/core/team')
 export class TeamController {
   constructor(private coreDaoServcie: CoreDaoServcie) {}

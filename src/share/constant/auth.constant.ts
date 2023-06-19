@@ -1,3 +1,4 @@
 export const JWTConstant = {
-  secret: 'cellPrivateKey',
+  // TODO 这个私钥要替换
+  secret: 'cellinkPrivateKey',
 };

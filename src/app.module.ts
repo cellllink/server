@@ -12,6 +12,7 @@ import { MongooseConfigService, TypeOrmConfigService } from './share/services';
 // 业务 modules
 import { ShareModule } from './share/share.module';
 import { ApiModule } from './api/api.module';
+import { TestModule } from './test/test.module';
 
 @Module({
   imports: [
@@ -26,9 +27,9 @@ import { ApiModule } from './api/api.module';
     // 静态资源配置
     // TODO 此处配置还有问题
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, './static'),
-      serveRoot: 'static/',
-      // exclude: ['/api*'],
+      rootPath: join(__dirname, 'static'),
+      serveRoot: '/static',
+      exclude: ['/api*', 'mini*', 'open*'],
     }),
 
     // 数据库 Mysql 配置
@@ -46,6 +47,7 @@ import { ApiModule } from './api/api.module';
 
     // 业务模块
     ApiModule,
+    TestModule,
   ],
   providers: [],
 })

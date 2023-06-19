@@ -1,11 +1,13 @@
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { OrganizationController } from './organization.controller';
-import { OrganizationService } from './organization.service';
-import { TeamController } from './team.controller';
-import { TeamService } from './team.service';
-import { UserController } from './user.controller';
-import { UserService } from './user.service';
+import { JwtService } from '@nestjs/jwt';
+import { JwtStrategy } from './auth/jwt.strategy';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
+import { OrganizationController } from './organization/organization.controller';
+import { OrganizationService } from './organization/organization.service';
+import { TeamController } from './team/team.controller';
+import { TeamService } from './team/team.service';
+import { UserController } from './user/user.controller';
+import { UserService } from './user/user.service';
 
 export const CoreControllers = [
   AuthController,
@@ -14,4 +16,11 @@ export const CoreControllers = [
   UserController,
 ];
 
-export const CoreServices = [AuthService, OrganizationService, TeamService, UserService];
+export const CoreServices = [
+  JwtService,
+  JwtStrategy,
+  AuthService,
+  OrganizationService,
+  TeamService,
+  UserService,
+];

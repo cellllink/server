@@ -1,15 +1,17 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
+import { JwtAuthGuard } from 'src/share/guide';
 import { BaseException } from 'src/share/httpException';
 import { encryptPasswordBySalt, makeSalt } from 'src/share/utils';
 import { AuthRegisterDto, AuthLoginDto } from './auth.dto';
+import { AuthService } from './auth.service';
 import { LoginVo } from './auth.vo';
 
 @ApiTags('CoreAuth')
 @Controller('/api/core/auth')
 export class AuthController {
-  constructor(private coreDaoServcie: CoreDaoServcie) {}
+  constructor(private coreDaoServcie: CoreDaoServcie, private authService: AuthService) {}
 
   // 注册
   @Post('register')
@@ -33,6 +35,7 @@ export class AuthController {
 
   // 登录
   @Post('login')
+  @UseGuards(JwtAuthGuard)
   @ApiBody({ type: AuthLoginDto })
   async login(@Body() dto: AuthLoginDto): Promise<LoginVo> {
     const { account, password } = dto;
@@ -45,7 +48,7 @@ export class AuthController {
 
     return {
       user,
-      token: '',
+      token: this.authService.createAuthToken(user.id),
     };
   }
 }

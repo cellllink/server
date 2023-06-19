@@ -1,24 +1,27 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
 import { OrganizationPo, OrganizationUserStatus, TeamPo, UserPo } from 'packages/database/po/core';
+import { CommonOrganizationDto, CommonUserDto } from 'src/share/dto/common.dto';
+import { JwtAuthGuard } from 'src/share/guide';
 import { BaseException } from 'src/share/httpException';
-import { OrganizationInviteDto } from './user.dto';
 import { UserService } from './user.service';
 
 @ApiTags('CoreUser')
+@UseGuards(JwtAuthGuard)
 @Controller('/api/core/user')
 export class UserController {
   constructor(private coreDaoServcie: CoreDaoServcie, private userService: UserService) {}
 
   /**
    * 用户信息
-   * @param id
+   * @param dto
    * @returns
    */
-  @Post('info/:userId')
-  async info(@Param('userId') id: number): Promise<UserPo> {
-    const user = await this.coreDaoServcie.findUserById(id);
+  @Post('info')
+  @ApiBody({ type: CommonUserDto })
+  async info(@Body() dto: CommonUserDto): Promise<UserPo> {
+    const user = await this.coreDaoServcie.findUserById(dto.user_id);
 
     if (!user) throw new BaseException('该用户不存在');
 
@@ -50,8 +53,8 @@ export class UserController {
    * @returns
    */
   @Post('organization/invite/pass')
-  @ApiBody({ type: OrganizationInviteDto })
-  async organizationInvitePass(@Body() dto: OrganizationInviteDto): Promise<string> {
+  @ApiBody({ type: CommonOrganizationDto })
+  async organizationInvitePass(@Body() dto: CommonOrganizationDto): Promise<string> {
     const { organization_id, user_id } = dto;
 
     await this.userService.organizationInviteDeal(
@@ -69,7 +72,8 @@ export class UserController {
    * @returns
    */
   @Post('organization/invite/refuse')
-  async organizationInviteRefuse(@Body() dto: OrganizationInviteDto): Promise<string> {
+  @ApiBody({ type: CommonOrganizationDto })
+  async organizationInviteRefuse(@Body() dto: CommonOrganizationDto): Promise<string> {
     const { organization_id, user_id } = dto;
 
     await this.userService.organizationInviteDeal(
@@ -86,9 +90,9 @@ export class UserController {
    * @param id
    * @returns
    */
-  @Post('organizations/:userId')
-  async organizations(@Param('userId') id: number): Promise<OrganizationPo[]> {
-    return await this.coreDaoServcie.findUserOrganizations(id);
+  @Post('organizations')
+  async organizations(@Body() dto: CommonOrganizationDto): Promise<OrganizationPo[]> {
+    return await this.coreDaoServcie.findUserOrganizations(dto.user_id);
   }
 
   /**
@@ -96,8 +100,8 @@ export class UserController {
    * @param id
    * @returns
    */
-  @Post('teams/:userId')
-  async teams(@Param('userId') id: number): Promise<TeamPo[]> {
-    return await this.coreDaoServcie.findUserTeams(id);
+  @Post('teams')
+  async teams(@Body() dto: CommonOrganizationDto): Promise<TeamPo[]> {
+    return await this.coreDaoServcie.findUserTeams(dto.user_id, dto.organization_id);
   }
 }
