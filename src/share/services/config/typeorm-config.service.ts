@@ -13,6 +13,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       // entities: [`${__dirname}/**/*.entity.{ts,js}`],
       autoLoadEntities: true,
       synchronize: false,
+      // timezone: '+08:00',
     };
   }
 }
