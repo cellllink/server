@@ -8,6 +8,7 @@ import {
   TeamUserPo,
   UserPo,
 } from 'packages/database/po/core';
+import { ProductPo } from 'packages/database/po/core/product.po';
 import { CoreRepositoryService } from 'packages/database/service';
 import { getPosValueOfTargetKey } from 'packages/share/util/filter.util';
 import { FindOptionsSelectByString, In } from 'typeorm';
@@ -25,11 +26,7 @@ export class CoreDaoServcie {
     'update_time',
   ];
 
-  constructor(public repository: CoreRepositoryService) {
-    this.main();
-  }
-
-  private async main() {}
+  constructor(public repository: CoreRepositoryService) {}
 
   /**
    * 通过用户 id 获取用户信息
@@ -52,9 +49,6 @@ export class CoreDaoServcie {
     return await this.repository.user.find({
       where: {
         id: In(ids),
-      },
-      order: {
-        id: 'ASC',
       },
     });
   }
@@ -195,5 +189,36 @@ export class CoreDaoServcie {
     });
 
     return this.findUsersByIds(getPosValueOfTargetKey(teamUsers, 'user_id'));
+  }
+
+  /**
+   * 通过组织 id 获取组织的产品列表
+   * @param organizationId
+   * @returns
+   */
+  public async findOrganizationProducts(organizationId: number): Promise<ProductPo[]> {
+    return await this.repository.product.find({
+      where: {
+        organization_id: organizationId,
+      },
+    });
+  }
+
+  /**
+   * 获取组织的指定产品信息
+   * @param productId
+   * @param organizationId
+   * @returns
+   */
+  public async findOrganizationProduct(
+    productId: number,
+    organizationId: number,
+  ): Promise<ProductPo> {
+    return await this.repository.product.findOne({
+      where: {
+        id: productId,
+        organization_id: organizationId,
+      },
+    });
   }
 }

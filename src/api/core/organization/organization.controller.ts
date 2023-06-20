@@ -2,6 +2,8 @@ import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
 import { OrganizationPo, OrganizationUserStatus, UserPo } from 'packages/database/po/core';
+import { ProductPo } from 'packages/database/po/core/product.po';
+import { CommonOrganizationDto } from 'src/share/dto/common.dto';
 import { JwtAuthGuard } from 'src/share/guide';
 import { BaseException } from 'src/share/httpException';
 import {
@@ -121,5 +123,49 @@ export class OrganizationController {
   @Post('members/invited/:organizationId')
   async membersInvited(@Param('organizationId') id: number): Promise<UserPo[]> {
     return await this.coreDaoServcie.findOrganizationUsers(id, [OrganizationUserStatus.invite]);
+  }
+
+  // 产品列表
+  @Post('products')
+  @ApiBody({ type: CommonOrganizationDto })
+  async products(@Body() dto: CommonOrganizationDto): Promise<ProductPo[]> {
+    return await this.coreDaoServcie.findOrganizationProducts(dto.organization_id);
+  }
+
+  // 添加产品
+  @Post('product/add')
+  async productAdd(@Body() dto: Partial<ProductPo>): Promise<string> {
+    await this.coreDaoServcie.repository.product.save(dto);
+    return '添加成功';
+  }
+
+  // 编辑产品
+  @Post('product/edit')
+  async productEdit(@Body() dto: Partial<ProductPo> & CommonOrganizationDto): Promise<string> {
+    const { id, organization_id } = dto;
+
+    const product = await this.coreDaoServcie.findOrganizationProduct(id, organization_id);
+
+    if (!product) throw new BaseException('该产品不存在');
+
+    await this.coreDaoServcie.repository.product.save(dto);
+
+    return '添加成功';
+  }
+
+  // 产品详情
+  @Post('product/detail')
+  @ApiBody({ type: CommonOrganizationDto })
+  async productDetail(@Body() dto: CommonOrganizationDto): Promise<ProductPo> {
+    const product = this.coreDaoServcie.findOrganizationProduct(id, organization_id);
+
+    if (!product) throw new BaseException('该产品不存在');
+  }
+
+  // 移除产品
+  @Post('product/remove')
+  @ApiBody({ type: CommonOrganizationDto })
+  async productRemove(@Body() dto: CommonOrganizationDto): Promise<ProductPo[]> {
+    return await this.coreDaoServcie.findOrganizationProducts(dto.organization_id);
   }
 }
