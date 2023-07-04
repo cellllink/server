@@ -11,20 +11,22 @@ import {
 import { ProductPo } from 'packages/database/po/core/product.po';
 import { CoreRepositoryService } from 'packages/database/service';
 import { getPosValueOfTargetKey } from 'packages/share/util/filter.util';
-import { FindOptionsSelectByString, In } from 'typeorm';
+import { createSelectOptions } from 'packages/share/util/findOption.util';
+import { FindOptionsSelect, In } from 'typeorm';
 
 @Injectable()
 export class CoreDaoServcie {
-  private userSelects: FindOptionsSelectByString<User> = [
-    'id',
-    'account',
-    'name',
-    'avatar',
-    'phone',
-    'sex',
-    'register_time',
-    'update_time',
-  ];
+  // TODO 这里需要加一个 util 方法去通过 字符串数组 生成该对象
+  private userSelects: FindOptionsSelect<User> = {
+    id: true,
+    account: true,
+    name: true,
+    avatar: true,
+    phone: true,
+    sex: true,
+    register_time: true,
+    update_time: true,
+  };
 
   constructor(public repository: CoreRepositoryService) {}
 

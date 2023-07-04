@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from 'packages/database/database.module';
 
-import { CoreDaoServcie } from './service';
+import { UserDaoService, CoreDaoServcie } from './service';
 
-const Services = [CoreDaoServcie];
+const Services = [UserDaoService, CoreDaoServcie];
 
 @Module({
   imports: [DatabaseModule],

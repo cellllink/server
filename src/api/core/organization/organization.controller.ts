@@ -154,13 +154,13 @@ export class OrganizationController {
   }
 
   // 产品详情
-  @Post('product/detail')
-  @ApiBody({ type: CommonOrganizationDto })
-  async productDetail(@Body() dto: CommonOrganizationDto): Promise<ProductPo> {
-    const product = this.coreDaoServcie.findOrganizationProduct(id, organization_id);
+  // @Post('product/detail')
+  // @ApiBody({ type: CommonOrganizationDto })
+  // async productDetail(@Body() dto: CommonOrganizationDto): Promise<ProductPo> {
+  //   const product = this.coreDaoServcie.findOrganizationProduct(id, organization_id);
 
-    if (!product) throw new BaseException('该产品不存在');
-  }
+  //   if (!product) throw new BaseException('该产品不存在');
+  // }
 
   // 移除产品
   @Post('product/remove')
