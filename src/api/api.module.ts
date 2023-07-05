@@ -11,7 +11,7 @@ import { JWTConstant } from 'src/share/constant/auth.constant';
     PassportModule,
     JwtModule.register({
       secret: JWTConstant.secret,
-      signOptions: { expiresIn: '24h' }, // 过期时间 1 小时
+      signOptions: { expiresIn: '24h' }, // 过期时间 24 小时
     }),
     DaoModule,
   ],

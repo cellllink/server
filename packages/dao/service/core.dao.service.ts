@@ -10,8 +10,6 @@ import {
 } from 'packages/database/po/core';
 import { ProductPo } from 'packages/database/po/core/product.po';
 import { CoreRepositoryService } from 'packages/database/service';
-import { getPosValueOfTargetKey } from 'packages/share/util/filter.util';
-import { createSelectOptions } from 'packages/share/util/findOption.util';
 import { FindOptionsSelect, In } from 'typeorm';
 
 @Injectable()
@@ -78,7 +76,7 @@ export class CoreDaoServcie {
 
     return await this.repository.organization.find({
       where: {
-        id: In(getPosValueOfTargetKey(organizationUsers, 'organization_id')),
+        id: In(organizationUsers.map(i => i.organization_id)),
       },
     });
   }
@@ -96,7 +94,7 @@ export class CoreDaoServcie {
 
     return await this.repository.team.find({
       where: {
-        id: In(getPosValueOfTargetKey(teamUsers, 'team_id')),
+        id: In(teamUsers.map(i => i.team_id)),
         organization_id: organizationId,
       },
     });
@@ -151,7 +149,7 @@ export class CoreDaoServcie {
       },
     });
 
-    return this.findUsersByIds(getPosValueOfTargetKey(organizationUsers, 'user_id'));
+    return this.findUsersByIds(organizationUsers.map(i => i.user_id));
   }
 
   /**
@@ -190,7 +188,7 @@ export class CoreDaoServcie {
       where: { team_id: teamId },
     });
 
-    return this.findUsersByIds(getPosValueOfTargetKey(teamUsers, 'user_id'));
+    return this.findUsersByIds(teamUsers.map(i => i.user_id));
   }
 
   /**

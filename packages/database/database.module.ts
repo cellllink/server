@@ -1,24 +1,24 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 import { ManagerService } from './service/manager.service';
 import { CoreRepositoryService } from './service/core.repository.service';
-
-import {
-  Group,
-  Organization,
-  OrganizationUser,
-  Product,
-  Team,
-  TeamUser,
-  User,
-} from './entity/core';
+import { CoUser, CoOrganization, CoOrganizationUser, CoTeam, CoTeamUser } from './structure';
+import { ComGroup } from './structure';
+import { OrgProduct } from './structure';
+import { BsDefect, BsDefectProject } from './structure';
 
 const Services = [ManagerService, CoreRepositoryService];
-const CoreEntities = [Organization, OrganizationUser, Team, TeamUser, User, Group, Product];
 
+const CoreEntities = [CoUser, CoOrganization, CoOrganizationUser, CoTeam, CoTeamUser];
+const CommonEntities = [ComGroup];
+const OrgEntities = [OrgProduct];
+const BsEntities = [BsDefect, BsDefectProject];
+
+@Global()
 @Module({
-  imports: [TypeOrmModule.forFeature([...CoreEntities])],
+  imports: [
+    TypeOrmModule.forFeature([...CoreEntities, ...CommonEntities, ...OrgEntities, ...BsEntities]),
+  ],
   providers: [...Services],
   exports: [...Services],
 })

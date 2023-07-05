@@ -1,1 +1,2 @@
-export * from './structure/user.structure';
+export * from './service';
+export * from './structure';
