@@ -2,7 +2,7 @@ import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
 import { OrganizationPo, OrganizationUserStatus, TeamPo, UserPo } from 'packages/database/po/core';
-import { CommonOrganizationDto, CommonUserDto } from 'src/share/dto/common.dto';
+import { CommonOrganizationDto, CommonUserDto } from 'src/share/dto/api.common.dto';
 import { JwtAuthGuard } from 'src/share/guide';
 import { BaseException } from 'src/share/httpException';
 import { UserService } from './user.service';

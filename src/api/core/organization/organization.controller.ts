@@ -3,9 +3,10 @@ import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
 import { OrganizationPo, OrganizationUserStatus, UserPo } from 'packages/database/po/core';
 import { ProductPo } from 'packages/database/po/core/product.po';
-import { CommonOrganizationDto } from 'src/share/dto/common.dto';
+import { CommonOrganizationDto } from 'src/share/dto/api.common.dto';
 import { JwtAuthGuard } from 'src/share/guide';
 import { BaseException } from 'src/share/httpException';
+import { baseExceptionCheck } from 'src/share/util/exception.util';
 import {
   OrganizationCreateDto,
   OrganizationInviteDto,
@@ -145,8 +146,7 @@ export class OrganizationController {
     const { id, organization_id } = dto;
 
     const product = await this.coreDaoServcie.findOrganizationProduct(id, organization_id);
-
-    if (!product) throw new BaseException('该产品不存在');
+    baseExceptionCheck(!product, '该产品不存在');
 
     await this.coreDaoServcie.repository.product.save(dto);
 

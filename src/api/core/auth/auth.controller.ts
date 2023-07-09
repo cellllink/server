@@ -3,7 +3,7 @@ import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoreDaoServcie } from 'packages/dao/service';
 import { JwtAuthGuard } from 'src/share/guide';
 import { BaseException } from 'src/share/httpException';
-import { encryptPasswordBySalt, makeSalt } from 'src/share/utils';
+import { encryptPasswordBySalt, makeSalt } from 'src/share/util';
 import { AuthRegisterDto, AuthLoginDto } from './auth.dto';
 import { AuthService } from './auth.service';
 import { LoginVo } from './auth.vo';
