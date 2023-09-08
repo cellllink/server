@@ -2,7 +2,7 @@
 
 -- co_xxx 核心表 (co_user)
 
--- cm_xxx 共享表，做一些常用功能的聚合，通过 type 区分 (cm_tag cm_group)
+-- com_xxx 共享表，做一些常用功能的聚合，通过 type 区分 (cm_tag cm_group)
 
 -- bs_xxx_xxx 业务模块表 (bs_defect_project bs_defect_row)
 

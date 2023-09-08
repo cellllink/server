@@ -4,8 +4,26 @@
   "sourceRoot": "src",
   "compilerOptions": {
     "assets": [
-      { "include": "./config/*.yaml", "outDir": "./dist/src" },
-      { "include": "../static/*", "outDir": "./dist/src/static" }
-    ]
+      {
+        "include": "./config/*.yaml",
+        "outDir": "./dist/src"
+      },
+      {
+        "include": "../static/*",
+        "outDir": "./dist/src/static"
+      }
+    ],
+    "webpack": true
+  },
+  "projects": {
+    "database": {
+      "type": "library",
+      "root": "libs/database",
+      "entryFile": "index",
+      "sourceRoot": "libs/database/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/database/tsconfig.lib.json"
+      }
+    }
   }
 }

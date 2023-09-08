@@ -9,7 +9,7 @@ import {
   UserPo,
 } from 'packages/database/po/core';
 import { ProductPo } from 'packages/database/po/core/product.po';
-import { CoreRepositoryService } from 'packages/database/service';
+import { CoreRepositoryService } from '@database/database/service';
 import { FindOptionsSelect, In } from 'typeorm';
 
 @Injectable()

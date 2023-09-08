@@ -5,7 +5,6 @@ import { HttpInterceptor } from './share/http.interceptor';
 import { setSwaager } from './config/swagger.config';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
-import * as csurf from 'csurf';
 
 async function bootstrap() {
   const App = await NestFactory.create(AppModule, {

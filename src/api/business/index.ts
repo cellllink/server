@@ -1,5 +1,5 @@
 import { DefectControllers, DefectServices } from './defect';
 
-export const BusinessControllers = [...DefectControllers];
+export const BusinessControllers = [].concat(DefectControllers);
 
-export const BusinessServices = [...DefectServices];
+export const BusinessServices = [].concat(DefectServices);

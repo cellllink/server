@@ -7,11 +7,27 @@ import {
   PCoTeamPos,
   PCoUserPo,
   PCoUserPos,
-} from 'packages/database';
-import { CoreRepositoryService } from 'packages/database/service';
-import { createSelectOptions } from 'packages/share/util/findOption.util';
+} from '@database/database';
+import { CoreRepositoryService } from '@database/database/service';
+import { createSelectOptions } from '@database/share/util/findOption.util';
 import { In } from 'typeorm';
-import { CoUserDaoServiceImpl } from './co.user.dao.service.impl';
+
+export interface CoUserDaoServiceImpl {
+  // 通过账户查询用户
+  findUserByAccount(account: string): PCoUserPo;
+
+  // 通过 id 查询用户
+  findUserById(userId: number): PCoUserPo;
+
+  // 通过 id 查询用户列表
+  findUsersByIds(userIds: number[]): PCoUserPos;
+
+  // 查询用户的组织列表<默认用户在职的>
+  findUserOrganizations(userId: number, status?: CoOrganizationUserStatusEnum): PCoOrganizationPos;
+
+  // 查询用户的团队列表<默认用户加入的>
+  findUserTeams(userId: number, status?: CoTeamUserStatusEnum): PCoTeamPos;
+}
 
 @Injectable()
 export class CoUserDaoService implements CoUserDaoServiceImpl {

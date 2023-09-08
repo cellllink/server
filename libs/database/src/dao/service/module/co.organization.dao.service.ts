@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 import {
   CoOrganizationUserStatusEnum,
   PCoOrganizationPo,
@@ -7,7 +9,7 @@ import {
   PCoUserPos,
   POrgProductPo,
   POrgProductPos,
-} from 'packages/database';
+} from '@database/database';
 
 export interface CoOrganizationDaoServiceImpl {
   // 通过 id 查询组织
@@ -34,4 +36,25 @@ export interface CoOrganizationDaoServiceImpl {
 
   // 查询组织的产品列表
   findOrganizationProducts(organizationId: number): POrgProductPos;
+}
+
+@Injectable()
+export class CoOrganizationDaoService implements CoOrganizationDaoServiceImpl {
+  findOrganizationById(organizationId: number): PCoOrganizationPo {}
+
+  findOrganizationUser(
+    organizationId: number,
+    userId: number,
+    status?: CoOrganizationUserStatusEnum,
+  ): PCoOrganizationUserPo {}
+
+  findOrganizationUsers(organizationId: number): PCoUserPos {}
+
+  findOrganizationTeam(organizationId: number, teamId: number): PCoTeamPo {}
+
+  findOrganizationTeams(organizationId: number): PCoTeamPos {}
+
+  findOrganizationProduct(organizationId: number, productId: number): POrgProductPo {}
+
+  findOrganizationProducts(organizationId: number): POrgProductPos {}
 }
