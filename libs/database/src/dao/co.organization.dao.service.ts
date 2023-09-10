@@ -9,7 +9,7 @@ import {
   PCoUserPos,
   POrgProductPo,
   POrgProductPos,
-} from '@database/database';
+} from '@database/structure';
 
 export interface CoOrganizationDaoServiceImpl {
   // 通过 id 查询组织
@@ -40,21 +40,35 @@ export interface CoOrganizationDaoServiceImpl {
 
 @Injectable()
 export class CoOrganizationDaoService implements CoOrganizationDaoServiceImpl {
-  findOrganizationById(organizationId: number): PCoOrganizationPo {}
+  findOrganizationById(organizationId: number): PCoOrganizationPo {
+    return new Promise(() => {});
+  }
 
   findOrganizationUser(
     organizationId: number,
     userId: number,
     status?: CoOrganizationUserStatusEnum,
-  ): PCoOrganizationUserPo {}
+  ): PCoOrganizationUserPo {
+    return new Promise(() => {});
+  }
 
-  findOrganizationUsers(organizationId: number): PCoUserPos {}
+  findOrganizationUsers(organizationId: number): PCoUserPos {
+    return new Promise(() => {});
+  }
 
-  findOrganizationTeam(organizationId: number, teamId: number): PCoTeamPo {}
+  findOrganizationTeam(organizationId: number, teamId: number): PCoTeamPo {
+    return new Promise(() => {});
+  }
 
-  findOrganizationTeams(organizationId: number): PCoTeamPos {}
+  findOrganizationTeams(organizationId: number): PCoTeamPos {
+    return new Promise(() => {});
+  }
 
-  findOrganizationProduct(organizationId: number, productId: number): POrgProductPo {}
+  findOrganizationProduct(organizationId: number, productId: number): POrgProductPo {
+    return new Promise(() => {});
+  }
 
-  findOrganizationProducts(organizationId: number): POrgProductPos {}
+  findOrganizationProducts(organizationId: number): POrgProductPos {
+    return new Promise(() => {});
+  }
 }

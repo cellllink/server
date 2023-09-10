@@ -7,10 +7,8 @@ import {
   PCoTeamPos,
   PCoUserPo,
   PCoUserPos,
-} from '@database/database';
-import { CoreRepositoryService } from '@database/database/service';
-import { createSelectOptions } from '@database/share/util/findOption.util';
-import { In } from 'typeorm';
+} from '@database/structure';
+import { CoreRepositoryService } from './repository.service';
 
 export interface CoUserDaoServiceImpl {
   // 通过账户查询用户
@@ -31,35 +29,26 @@ export interface CoUserDaoServiceImpl {
 
 @Injectable()
 export class CoUserDaoService implements CoUserDaoServiceImpl {
-  private userSelectOptions = createSelectOptions<CoUser>([
-    'id',
-    'account',
-    'name',
-    'avatar',
-    'phone',
-    'sex',
-    'register_time',
-    'update_time',
-  ]);
+  private userSelectBaseOptions = ['id', 'name', 'avatar', 'sex'];
 
-  constructor(private repository: CoreRepositoryService) {}
+  constructor(private core: CoreRepositoryService) {}
 
   async findUserByAccount(account: string): PCoUserPo {
-    return await this.repository.user.findOne({
+    return await this.core.user.findOne({
       where: { account },
     });
   }
 
   async findUserById(id: number): PCoUserPo {
-    return await this.repository.user.findOne({
-      select: this.userSelectOptions,
+    return await this.core.user.findOne({
+      select: this.userSelectBaseOptions,
       where: { id },
     });
   }
 
   async findUsersByIds(ids: number[]): PCoUserPos {
-    return await this.repository.user.find({
-      select: this.userSelectOptions,
+    return await this.core.user.find({
+      select: this.userSelectBaseOptions,
       where: { id: In(ids) },
     });
   }

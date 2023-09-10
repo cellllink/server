@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { CoreDaoServcie } from '@database/dao/service';
+import { CoreDaoServcie } from '@database/dao';
 import { OrganizationPo, OrganizationUserStatus, UserPo } from 'packages/database/po/core';
 import { ProductPo } from 'packages/database/po/core/product.po';
 import { CommonOrganizationDto } from 'src/share/dto/api.common.dto';

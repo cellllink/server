@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CoTeamUserStatusEnum, PCoTeamPo, PCoUserPo, PCoUserPos } from '@database/database';
+import { CoTeamUserStatusEnum, PCoTeamPo, PCoUserPo, PCoUserPos } from '@database/structure';
 
 export interface CoTeamDaoServiceImpl {
   // 通过 id 查询团队
@@ -14,9 +14,15 @@ export interface CoTeamDaoServiceImpl {
 
 @Injectable()
 export class CoTeamDaoService implements CoTeamDaoServiceImpl {
-  findTeamById(teamId: number): PCoTeamPo {}
+  findTeamById(teamId: number): PCoTeamPo {
+    return new Promise(() => {});
+  }
 
-  findTeamUser(teamId: number, userId: number, status: CoTeamUserStatusEnum): PCoUserPo {}
+  findTeamUser(teamId: number, userId: number, status: CoTeamUserStatusEnum): PCoUserPo {
+    return new Promise(() => {});
+  }
 
-  findTeamUsers(teamId: number, status: CoTeamUserStatusEnum): PCoUserPos {}
+  findTeamUsers(teamId: number, status: CoTeamUserStatusEnum): PCoUserPos {
+    return new Promise(() => {});
+  }
 }

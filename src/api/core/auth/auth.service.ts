@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { CoreDaoServcie } from '@database/dao/service';
+import { CoreDaoServcie } from '@database/dao';
 import { JWTConstant } from 'src/share/constant/auth.constant';
 
 @Injectable()

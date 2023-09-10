@@ -1,4 +1,4 @@
-import { FindOptionsOrder, FindOptionsSelect } from 'typeorm';
+import { FindOptionsOrder } from 'typeorm';
 
 interface FindOptionsPage {
   skip: number;
@@ -33,16 +33,4 @@ export function getOrderFindOption<Entity>(
     ...ascs.map(name => ({ [name]: 'ASC' })),
     ...descs.map(name => ({ [name]: 'DASC' })),
   );
-}
-
-/**
- * 创建 Entity 搜索的数据结构，隐藏数据库表某些特殊的字段(如：用户密码)
- * @param keys
- * @returns FindOptionsSelect<Entity>
- */
-export function createSelectOptions<Entity>(keys: string[]): FindOptionsSelect<Entity> {
-  return keys.reduce((selectOptions, key) => {
-    selectOptions[key] = true;
-    return selectOptions;
-  }, {});
 }

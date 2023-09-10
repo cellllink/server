@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CoreDaoServcie } from '@database/dao/service';
+import { CoreDaoServcie } from '@database/dao';
 
 @Injectable()
 export class OrganizationService {

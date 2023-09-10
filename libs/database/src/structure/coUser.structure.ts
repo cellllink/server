@@ -77,8 +77,8 @@ export class CoUserPo {
   avatar: string;
   phone: string;
   sex: number;
-  register_time: string;
-  update_time: string;
+  register_time: Date;
+  update_time: Date;
 }
 
 export type PCoUserPo = Promise<CoUserPo>;

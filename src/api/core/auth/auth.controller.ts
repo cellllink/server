@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { CoreDaoServcie } from '@database/dao/service';
+import { CoreDaoServcie } from '@database/dao';
 import { JwtAuthGuard } from 'src/share/guide';
 import { BaseException } from 'src/share/httpException';
 import { encryptPasswordBySalt, makeSalt } from 'src/share/util';

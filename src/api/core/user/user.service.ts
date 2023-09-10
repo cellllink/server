@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CoreDaoServcie } from '@database/dao/service';
+import { CoreDaoServcie } from '@database/dao';
 import { OrganizationUserStatus } from 'packages/database/po/core';
 import { BaseException } from 'src/share/httpException';
 
