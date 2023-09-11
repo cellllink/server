@@ -13,7 +13,7 @@ import { MongooseConfigService, TypeOrmConfigService } from './share/services';
 import { ShareModule } from './share/share.module';
 import { ApiModule } from './api/api.module';
 import { TestModule } from './test/test.module';
-import { DatabaseModule } from '@database';
+import { DatabaseModule } from '@database/database.module';
 
 @Module({
   imports: [
@@ -48,7 +48,7 @@ import { DatabaseModule } from '@database';
     DatabaseModule,
 
     // 业务模块
-    // ApiModule,
+    ApiModule,
     TestModule,
   ],
   providers: [],

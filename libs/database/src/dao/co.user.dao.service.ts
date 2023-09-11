@@ -9,6 +9,7 @@ import {
   PCoUserPos,
 } from '@database/structure';
 import { CoreRepositoryService } from './repository.service';
+import { FindOptionsSelectByString, In } from 'typeorm';
 
 export interface CoUserDaoServiceImpl {
   // 通过账户查询用户
@@ -29,7 +30,12 @@ export interface CoUserDaoServiceImpl {
 
 @Injectable()
 export class CoUserDaoService implements CoUserDaoServiceImpl {
-  private userSelectBaseOptions = ['id', 'name', 'avatar', 'sex'];
+  private userSelectBaseOptions: FindOptionsSelectByString<CoUser> = [
+    'id',
+    'name',
+    'avatar',
+    'sex',
+  ];
 
   constructor(private core: CoreRepositoryService) {}
 

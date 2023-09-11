@@ -21,6 +21,5 @@
       "@database": ["libs/database/src"],
       "@database/*": ["libs/database/src/*"]
     }
-  },
-  "references": []
+  }
 }

@@ -4,8 +4,8 @@ import * as fs from 'fs';
 
 export function setSwaager(app: INestApplication) {
   const config = new DocumentBuilder()
-    .setTitle('细胞管理系统')
-    .setDescription('细胞、项目管理、任务排期')
+    .setTitle('Cellink')
+    .setDescription('-')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

@@ -1,13 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CoreDaoServcie } from '@database/dao';
-import { Select } from 'speedsql';
 
 @Injectable()
 export class TestService {
-  constructor(private coreDaoServcie: CoreDaoServcie) {
-    this.test().then(console.log);
-  }
+  constructor() {}
 
-  @Select('select user * fron `user`')
   async test() {}
 }
