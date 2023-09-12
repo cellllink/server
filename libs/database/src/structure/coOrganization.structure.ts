@@ -28,6 +28,13 @@ export class CoOrganization {
     default: () => 'CURRENT_TIMESTAMP',
   })
   create_time: Date;
+
+  @Column('tinyint', {
+    name: 'logic_delete',
+    comment: '是否逻辑删除 0:正常 1:删除',
+    default: () => "'0'",
+  })
+  logic_delete: number;
 }
 
 export interface CoOrganizationPo {
@@ -77,6 +84,13 @@ export class CoOrganizationUser {
     default: () => "'2'",
   })
   status: number;
+
+  @Column('tinyint', {
+    name: 'logic_delete',
+    comment: '是否逻辑删除 0:正常 1:删除',
+    default: () => "'0'",
+  })
+  logic_delete: number;
 }
 
 export interface CoOrganizationUserPo {

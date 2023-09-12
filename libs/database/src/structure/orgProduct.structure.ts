@@ -42,11 +42,11 @@ export class OrgProduct {
   create_time: Date;
 
   @Column('tinyint', {
-    name: 'data_status',
-    comment: '数据状态 0:正常 99:删除',
+    name: 'logic_delete',
+    comment: '是否逻辑删除 0:正常 1:删除',
     default: () => "'0'",
   })
-  data_status: number;
+  logic_delete: number;
 }
 
 export interface OrgProductPo {

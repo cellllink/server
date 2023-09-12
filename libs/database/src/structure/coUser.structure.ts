@@ -66,6 +66,13 @@ export class CoUser {
     default: () => 'CURRENT_TIMESTAMP',
   })
   update_time: Date;
+
+  @Column('tinyint', {
+    name: 'logic_delete',
+    comment: '是否逻辑删除 0:正常 1:删除',
+    default: () => "'0'",
+  })
+  logic_delete: number;
 }
 
 export class CoUserPo {

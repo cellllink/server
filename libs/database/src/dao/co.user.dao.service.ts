@@ -3,6 +3,7 @@ import {
   CoOrganizationUserStatusEnum,
   CoTeamUserStatusEnum,
   CoUser,
+  CoUserPo,
   PCoOrganizationPos,
   PCoTeamPos,
   PCoUserPo,
@@ -10,8 +11,15 @@ import {
 } from '@database/structure';
 import { CoreRepositoryService } from './repository.service';
 import { FindOptionsSelectByString, In } from 'typeorm';
+import { LogicDeleteStatusEnum } from '@database/share/enum/common.enum';
 
 export interface CoUserDaoServiceImpl {
+  // 创建编辑用户信息
+  save(user: Partial<CoUserPo>): PCoUserPo;
+
+  // 删除用户
+  delete(userId: number): void;
+
   // 通过账户查询用户
   findUserByAccount(account: string): PCoUserPo;
 
@@ -38,6 +46,17 @@ export class CoUserDaoService implements CoUserDaoServiceImpl {
   ];
 
   constructor(private core: CoreRepositoryService) {}
+
+  async save(user: Partial<CoUserPo>) {
+    return await this.core.user.save(user);
+  }
+
+  async delete(userId: number) {
+    await this.core.user.save({
+      id: userId,
+      logic_delete: LogicDeleteStatusEnum.deleted,
+    });
+  }
 
   async findUserByAccount(account: string): PCoUserPo {
     return await this.core.user.findOne({
