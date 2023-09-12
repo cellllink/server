@@ -78,16 +78,24 @@ export class CoUserDaoService implements CoUserDaoServiceImpl {
     });
   }
 
-  // 查询用户的组织列表<默认用户在职的>
   async findUserOrganizations(
     userId: number,
-    status?: CoOrganizationUserStatusEnum,
+    status = CoOrganizationUserStatusEnum.onJob,
   ): PCoOrganizationPos {
-    return [];
+    const organizationUsers = await this.core.organizationUser.find({
+      where: { user_id: userId, status },
+    });
+    return await this.core.organization.find({
+      where: { id: In(organizationUsers.map(i => i.organization_id)) },
+    });
   }
 
-  // 查询用户的团队列表<默认用户加入的>
-  async findUserTeams(userId: number, status?: CoTeamUserStatusEnum): PCoTeamPos {
-    return [];
+  async findUserTeams(userId: number, status = CoTeamUserStatusEnum.in): PCoTeamPos {
+    const teamUsers = await this.core.teamUser.find({
+      where: { user_id: userId, status },
+    });
+    return await this.core.team.find({
+      where: { id: In(teamUsers.map(i => i.team_id)) },
+    });
   }
 }

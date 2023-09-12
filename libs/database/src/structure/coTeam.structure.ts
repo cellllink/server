@@ -51,7 +51,6 @@ export interface CoTeamPo {
   name: string;
   logo: string;
   create_time: Date;
-  data_status: number;
 }
 
 export type PCoTeamPo = Promise<CoTeamPo>;

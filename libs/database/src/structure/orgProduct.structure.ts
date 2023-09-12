@@ -57,7 +57,6 @@ export interface OrgProductPo {
   logo: string;
   desc: string;
   create_time: Date;
-  data_status: number;
 }
 
 export type POrgProductPo = Promise<OrgProductPo>;
