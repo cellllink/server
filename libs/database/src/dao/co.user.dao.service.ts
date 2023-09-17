@@ -60,21 +60,21 @@ export class CoUserDaoService implements CoUserDaoServiceImpl {
 
   async findUserByAccount(account: string): PCoUserPo {
     return await this.core.user.findOne({
-      where: { account },
+      where: { account, logic_delete: 0 },
     });
   }
 
   async findUserById(id: number): PCoUserPo {
     return await this.core.user.findOne({
       select: this.userSelectBaseOptions,
-      where: { id },
+      where: { id, logic_delete: 0 },
     });
   }
 
   async findUsersByIds(ids: number[]): PCoUserPos {
     return await this.core.user.find({
       select: this.userSelectBaseOptions,
-      where: { id: In(ids) },
+      where: { id: In(ids), logic_delete: 0 },
     });
   }
 
