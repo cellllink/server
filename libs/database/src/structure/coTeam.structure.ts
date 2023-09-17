@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 /**
  * CoTeam
@@ -38,10 +38,11 @@ export class CoTeam {
 
   @Column('tinyint', {
     name: 'logic_delete',
+    nullable: true,
     comment: '是否逻辑删除 0:正常 1:删除',
     default: () => "'0'",
   })
-  logic_delete: number;
+  logic_delete: number | null;
 }
 
 export interface CoTeamPo {
@@ -60,22 +61,22 @@ export type PCoTeamPos = Promise<CoTeamPo[]>;
 /**
  * CoTeamUser
  */
+@Index('team_id', ['team_id'], {})
+@Index('user_id', ['user_id'], {})
 @Entity('co_team_user', { schema: 'cellink' })
 export class CoTeamUser {
-  @Column('int', {
-    primary: true,
-    name: 'team_id',
-    comment: '团队id',
+  @PrimaryGeneratedColumn({
+    type: 'int',
+    name: 'id',
+    comment: '自增id',
     unsigned: true,
   })
+  id: number;
+
+  @Column('int', { name: 'team_id', comment: '团队id', unsigned: true })
   team_id: number;
 
-  @Column('int', {
-    primary: true,
-    name: 'user_id',
-    comment: '用户id',
-    unsigned: true,
-  })
+  @Column('int', { name: 'user_id', comment: '用户id', unsigned: true })
   user_id: number;
 
   @Column('tinyint', {
@@ -88,13 +89,15 @@ export class CoTeamUser {
 
   @Column('tinyint', {
     name: 'logic_delete',
+    nullable: true,
     comment: '是否逻辑删除 0:正常 1:删除',
     default: () => "'0'",
   })
-  logic_delete: number;
+  logic_delete: number | null;
 }
 
 export interface CoTeamUserPo {
+  id: number;
   team_id: number;
   user_id: number;
   status: number;

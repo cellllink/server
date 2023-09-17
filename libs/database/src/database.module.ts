@@ -11,9 +11,16 @@ import {
   CommonDaoServcie,
 } from './dao';
 
-import { CoUser, CoOrganization, CoOrganizationUser, CoTeam, CoTeamUser } from './structure';
-import { ComGroup } from './structure';
-import { BsDefect, BsDefectProject } from './structure';
+import {
+  CoUser,
+  CoOrganization,
+  CoOrganizationUser,
+  CoOrganizationTeam,
+  CoTeam,
+  CoTeamUser,
+} from './structure';
+// import { ComGroup } from './structure';
+// import { BsDefect, BsDefectProject } from './structure';
 
 const DaoServices = [
   ManagerService,
@@ -33,13 +40,14 @@ const DaoServices = [
       CoUser,
       CoOrganization,
       CoOrganizationUser,
+      CoOrganizationTeam,
       CoTeam,
       CoTeamUser,
 
-      ComGroup,
+      // ComGroup,
 
-      BsDefect,
-      BsDefectProject,
+      // BsDefect,
+      // BsDefectProject,
     ]),
   ],
   providers: [].concat(DaoServices),

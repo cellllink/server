@@ -33,10 +33,9 @@ export class CoreRepositoryService {
 
 @Injectable()
 export class CommonRepositoryService {
-  constructor(
-    @InjectRepository(ComGroup)
-    public readonly group: Repository<ComGroup>,
-  ) {}
+  constructor() // @InjectRepository(ComGroup)
+  // public readonly group: Repository<ComGroup>,
+  {}
 }
 
 @Injectable()

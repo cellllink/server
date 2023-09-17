@@ -39,9 +39,9 @@ import { DatabaseModule } from '@database/database.module';
     }),
 
     // 数据库 Mongoose 配置
-    MongooseModule.forRootAsync({
-      useClass: MongooseConfigService,
-    }),
+    // MongooseModule.forRootAsync({
+    //   useClass: MongooseConfigService,
+    // }),
 
     // 共享模块
     ShareModule,

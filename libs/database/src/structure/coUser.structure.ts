@@ -69,10 +69,11 @@ export class CoUser {
 
   @Column('tinyint', {
     name: 'logic_delete',
+    nullable: true,
     comment: '是否逻辑删除 0:正常 1:删除',
     default: () => "'0'",
   })
-  logic_delete: number;
+  logic_delete: number | null;
 }
 
 export class CoUserPo {

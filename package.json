@@ -3,7 +3,7 @@
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nest start --watch",
     "build": "cross-env NODE_ENV=production nest build",
-    "create-entity": "typeorm-model-generator -h 115.29.243.9 -d cellink -p 3306 -u root -x care -e mysql -o tempEntities --noConfig true --cp snake"
+    "create-entity": "typeorm-model-generator -h 127.0.0.1 -d cellink -p 3306 -u root -x root -e mysql -o tempEntities --noConfig true --cp snake"
   },
   "dependencies": {
     "@fastify/static": "^6.5.0",

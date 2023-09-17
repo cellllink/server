@@ -14,10 +14,13 @@ CREATE TABLE
 
 CREATE TABLE
     `co_team_user` (
+        `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
         `team_id` int(11) unsigned NOT NULL COMMENT '团队id',
         `user_id` int(11) unsigned NOT NULL COMMENT '用户id',
         `status` tinyint(4) unsigned NOT NULL DEFAULT 2 COMMENT '成员状态',
         -- 
         `logic_delete` tinyint(4) DEFAULT 0 COMMENT '是否逻辑删除 0:正常 1:删除',
-        PRIMARY KEY (`team_id`, `user_id`)
+        PRIMARY KEY (`id`),
+        KEY `team_id` (`team_id`),
+        KEY `user_id` (`user_id`)
     ) DEFAULT CHARSET UTF8 COMMENT '团队用户的关联表';
