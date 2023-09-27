@@ -18,6 +18,7 @@ import {
   CoOrganizationTeam,
   CoTeam,
   CoTeamUser,
+  CoProduct,
 } from './structure';
 // import { ComGroup } from './structure';
 // import { BsDefect, BsDefectProject } from './structure';
@@ -43,6 +44,7 @@ const DaoServices = [
       CoOrganizationTeam,
       CoTeam,
       CoTeamUser,
+      CoProduct,
 
       // ComGroup,
 

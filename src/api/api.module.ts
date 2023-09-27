@@ -13,6 +13,8 @@ import { CoTeamController } from './co.team.controller';
 
 import { BsDefectController } from './bs.defect.controller';
 
+import { AuthService } from './service/auth.service';
+
 @Module({
   imports: [
     PassportModule,
@@ -31,6 +33,6 @@ import { BsDefectController } from './bs.defect.controller';
 
     BsDefectController,
   ],
-  providers: [],
+  providers: [AuthService],
 })
 export class ApiModule {}

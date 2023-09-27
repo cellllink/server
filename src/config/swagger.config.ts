@@ -6,7 +6,7 @@ export function setSwaager(app: INestApplication) {
   const config = new DocumentBuilder()
     .setTitle('Cellink')
     .setDescription('-')
-    .setVersion('1.0')
+    .setVersion('1.0.0')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);

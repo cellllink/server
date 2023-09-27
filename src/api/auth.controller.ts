@@ -7,11 +7,12 @@ import { baseExceptionCheck } from 'src/share/util/exception.util';
 import { CoUserPo, PCoUserPo } from '@database/structure';
 import { PVoid } from 'src/share/type/common.type';
 import { LoginVo } from './dto&vo/auth.vo';
+import { AuthService } from './service/auth.service';
 
 @ApiTags('ApiAuth')
 @Controller('/api/auth')
 export class AuthController {
-  constructor(private coUserDaoService: CoUserDaoService) {}
+  constructor(private coUserDaoService: CoUserDaoService, private authService: AuthService) {}
 
   @ApiBody({
     description: '用户注册',
@@ -29,7 +30,7 @@ export class AuthController {
     newUser.account = account;
     newUser.password = hashPassword;
     newUser.salt = salt;
-    newUser.name = '小细胞';
+    newUser.name = this.authService.getDefaultName();
     await this.coUserDaoService.save(newUser);
   }
 
