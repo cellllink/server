@@ -23,12 +23,17 @@ export class HttpInterceptor implements NestInterceptor {
         message: '',
         data,
       })),
+
       catchError((error: HttpException) => {
-        console.log(error);
         if (error instanceof HttpException) {
+          const code = error.getStatus();
+          const errorResponse = error.getResponse();
+          const message =
+            typeof errorResponse === 'string' ? errorResponse : JSON.stringify(errorResponse);
+
           return of({
-            code: error.getStatus(),
-            message: JSON.stringify(error.getResponse()),
+            code,
+            message,
             data: null,
           });
         }
