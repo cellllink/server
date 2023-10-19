@@ -41,6 +41,48 @@ export class BsTodoItemController {
   })
   @Post('edit')
   async edit() {}
+
+  @ApiBody({
+    description: '代办备注 编辑',
+  })
+  @Post('edit/notice')
+  async editNotice() {}
+
+  @ApiBody({
+    description: '代办 删除',
+  })
+  @Post('delete')
+  async delete() {}
+
+  @ApiBody({
+    description: '代办 详情',
+  })
+  @Post('detail')
+  async detail() {}
+
+  @ApiBody({
+    description: '代办列表 分组',
+  })
+  @Post('list/group')
+  async listGroup() {}
+
+  @ApiBody({
+    description: '代办列表 今天',
+  })
+  @Post('list/today')
+  async listToday() {}
+
+  @ApiBody({
+    description: '代办列表 搜索',
+  })
+  @Post('list/search')
+  async listSearch() {}
+
+  @ApiBody({
+    description: '代办列表 重要',
+  })
+  @Post('list/important')
+  async listImportant() {}
 }
 
 @ApiTags('api.bs.todo.step')
