@@ -12,8 +12,11 @@ import { CoOrganizationController } from './co.organization.controller';
 import { CoTeamController } from './co.team.controller';
 
 import { BsDefectController } from './bs.defect.controller';
+import { BsTodoControllers } from './bs.todo.controller';
 
 import { AuthService } from './service/auth.service';
+
+const BsControllers = [BsDefectController, ...BsTodoControllers];
 
 @Module({
   imports: [
@@ -31,7 +34,8 @@ import { AuthService } from './service/auth.service';
 
     ComController,
 
-    BsDefectController,
+    ...BsControllers,
+    ,
   ],
   providers: [AuthService],
 })

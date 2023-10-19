@@ -28,8 +28,8 @@
 - 添加 root 用户
 
   ```sh
-  docker exec -it mongo mongosh admin
-  db.createUser({ user: 'root', pwd: 'root', roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
+  docker exec -it mongo mongosh
+  db.createUser({ user: 'root', pwd: 'root', roles: [ { role: "userAdminAnyDatabase", db: "cellink" } ] });
   ```
 
 ## mysql:5.7
