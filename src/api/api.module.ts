@@ -34,8 +34,8 @@ const BsControllers = [BsDefectController, ...BsTodoControllers];
 
     ComController,
 
+    // BsDefectController,
     ...BsControllers,
-    ,
   ],
   providers: [AuthService],
 })
