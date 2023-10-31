@@ -1,28 +1,64 @@
+import { BsTodoDaoService } from '@database/dao/bs.todo.dao.service';
+import { PBsTodoGroupPos } from '@database/structure';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
+import {
+  GroupAddDto,
+  GroupDeleteDto,
+  GroupEditDto,
+  GroupListDto,
+  GroupMoveDto,
+} from './dto&vo/bs.todo.dto';
 
 @ApiTags('api.bs.todo.group')
 @Controller('/api/bs/todo/group')
 export class BsTodoGroupController {
-  constructor() {}
+  constructor(private bsTodoDaoService: BsTodoDaoService) {}
 
   @ApiBody({
     description: '分组&列表 添加',
+    type: GroupAddDto,
   })
-  @Post('group/add')
-  async groupAdd() {}
+  @Post('add')
+  async groupAdd(@Body() group: GroupAddDto): Promise<void> {
+    await this.bsTodoDaoService.saveGroup(group);
+  }
 
   @ApiBody({
     description: '分组&列表 编辑',
+    type: GroupEditDto,
   })
-  @Post('group/edit')
-  async groupEdit() {}
+  @Post('edit')
+  async groupEdit(@Body() group: GroupEditDto): Promise<void> {
+    await this.bsTodoDaoService.saveGroup(group);
+  }
 
   @ApiBody({
     description: '分组&列表 删除',
+    type: GroupDeleteDto,
   })
-  @Post('group/delete')
-  async groupDelete() {}
+  @Post('delete')
+  async groupDelete(@Body() { id }: GroupDeleteDto): Promise<void> {
+    await this.bsTodoDaoService.deleteGroup(id);
+  }
+
+  @ApiBody({
+    description: '分组&列表 列表',
+    type: GroupListDto,
+  })
+  @Post('list')
+  async list(@Body() { scene_uuid }: GroupListDto): PBsTodoGroupPos {
+    return await this.bsTodoDaoService.findGroupsBySceneUUID(scene_uuid);
+  }
+
+  @ApiBody({
+    description: '分组&列表 移动',
+    type: GroupMoveDto,
+  })
+  @Post('move')
+  async move(@Body() { target_id, move_id }: GroupMoveDto): PBsTodoGroupPos {
+    return await this.bsTodoDaoService.findGroupsAboutMove(target_id, move_id);
+  }
 }
 
 @ApiTags('api.bs.todo.item')

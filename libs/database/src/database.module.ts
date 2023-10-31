@@ -9,6 +9,7 @@ import {
   CoOrganizationDaoService,
   CoTeamDaoService,
   CommonDaoServcie,
+  BsTodoDaoService,
 } from './dao';
 
 import {
@@ -19,6 +20,9 @@ import {
   CoTeam,
   CoTeamUser,
   CoProduct,
+  BsTodoGroup,
+  BsTodoItem,
+  BsTodoStep,
 } from './structure';
 // import { ComGroup } from './structure';
 // import { BsDefect, BsDefectProject } from './structure';
@@ -28,10 +32,14 @@ const DaoServices = [
   CoreRepositoryService,
   CommonRepositoryService,
   BusinessRepositoryService,
+
   CoUserDaoService,
   CoOrganizationDaoService,
   CoTeamDaoService,
+
   CommonDaoServcie,
+
+  BsTodoDaoService,
 ];
 
 @Global()
@@ -50,6 +58,10 @@ const DaoServices = [
 
       // BsDefect,
       // BsDefectProject,
+
+      BsTodoGroup,
+      BsTodoItem,
+      BsTodoStep,
     ]),
   ],
   providers: [].concat(DaoServices),

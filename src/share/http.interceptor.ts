@@ -25,6 +25,8 @@ export class HttpInterceptor implements NestInterceptor {
       })),
 
       catchError((error: HttpException) => {
+        console.log(error);
+
         if (error instanceof HttpException) {
           const code = error.getStatus();
           const errorResponse = error.getResponse();

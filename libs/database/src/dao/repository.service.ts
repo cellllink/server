@@ -8,7 +8,9 @@ import {
   CoOrganizationUser,
   CoTeam,
   CoTeamUser,
-  ComGroup,
+  BsTodoGroup,
+  BsTodoItem,
+  BsTodoStep,
 } from '../structure';
 
 @Injectable()
@@ -33,12 +35,19 @@ export class CoreRepositoryService {
 
 @Injectable()
 export class CommonRepositoryService {
-  constructor() // @InjectRepository(ComGroup)
-  // public readonly group: Repository<ComGroup>,
-  {}
+  constructor() {} // public readonly group: Repository<ComGroup>, // @InjectRepository(ComGroup)
 }
 
 @Injectable()
 export class BusinessRepositoryService {
-  constructor() {}
+  constructor(
+    @InjectRepository(BsTodoGroup)
+    public readonly todoGroup: Repository<BsTodoGroup>,
+
+    @InjectRepository(BsTodoItem)
+    public readonly todoItem: Repository<BsTodoItem>,
+
+    @InjectRepository(BsTodoStep)
+    public readonly todoStep: Repository<BsTodoStep>,
+  ) {}
 }

@@ -6,5 +6,6 @@ export * from './coProduct.structure';
 export * from './comGroup.stucture';
 
 export * from './bsDefect.structure';
+export * from './bsTodo.structure';
 
 export * from './orgProduct.structure';
