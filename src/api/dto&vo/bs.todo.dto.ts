@@ -2,11 +2,12 @@ import { IsNotEmpty } from 'class-validator';
 
 export class GroupAddDto {
   @IsNotEmpty()
+  type: 'group' | 'list';
+
+  @IsNotEmpty()
   scene_uuid: string;
 
   catalogue_id?: number;
-
-  icon?: string;
 
   @IsNotEmpty()
   title: string;

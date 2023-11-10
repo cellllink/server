@@ -1,6 +1,6 @@
 import { BsTodoDaoService } from '@database/dao/bs.todo.dao.service';
 import { PBsTodoGroupPos } from '@database/structure';
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import {
   GroupAddDto,
@@ -9,11 +9,15 @@ import {
   GroupListDto,
   GroupMoveDto,
 } from './dto&vo/bs.todo.dto';
+import { BusinessRepositoryService } from '@database/dao';
 
 @ApiTags('api.bs.todo.group')
 @Controller('/api/bs/todo/group')
 export class BsTodoGroupController {
-  constructor(private bsTodoDaoService: BsTodoDaoService) {}
+  constructor(
+    private bsTodoDaoService: BsTodoDaoService,
+    private business: BusinessRepositoryService,
+  ) {}
 
   @ApiBody({
     description: '分组&列表 添加',
@@ -21,7 +25,7 @@ export class BsTodoGroupController {
   })
   @Post('add')
   async groupAdd(@Body() group: GroupAddDto): Promise<void> {
-    await this.bsTodoDaoService.saveGroup(group);
+    await this.business.todoGroup.save(group);
   }
 
   @ApiBody({
@@ -57,6 +61,7 @@ export class BsTodoGroupController {
   })
   @Post('move')
   async move(@Body() { target_id, move_id }: GroupMoveDto): PBsTodoGroupPos {
+    // 先拿出来，在插入进入
     return await this.bsTodoDaoService.findGroupsAboutMove(target_id, move_id);
   }
 }

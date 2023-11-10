@@ -8,7 +8,7 @@ CREATE TABLE
         -- 
         `icon` varchar(20) COMMENT 'icon',
         `title` varchar(50) COMMENT '标题',
-        `count` int(4) unsigned NOT NULL DEFAULT 0 COMMENT '子项数量',
+        `count` int(4) unsigned NOT NULL DEFAULT 0 COMMENT '子项数量,列表才需要',
         `order_prev_id` int(11) unsigned COMMENT '排序上一个的id,没有这个id就是第一个',
         -- 
         `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -32,6 +32,7 @@ CREATE TABLE
         `is_finish` int(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否完成',
         `is_important` int(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否重要',
         `add_today_date` date COMMENT '加入今天的日期',
+        `order_prev_id` int(11) unsigned COMMENT '排序上一个的id,没有这个id就是第一个',
         -- 
         `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
         `logic_delete` tinyint(4) DEFAULT 0 COMMENT '是否逻辑删除 0:正常 1:删除',
@@ -46,7 +47,10 @@ CREATE TABLE
         `scene_uuid` varchar(36) COMMENT '关联唯一场景标识scene_uuid,其他场景提供',
         `item_id` int(11) unsigned NOT NULL COMMENT '分组id',
         -- 
+        `title` varchar(50) COMMENT '标题',
+        -- 
         `is_finish` int(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否完成',
+        `order_prev_id` int(11) unsigned COMMENT '排序上一个的id,没有这个id就是第一个',
         -- 
         `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
         `logic_delete` tinyint(4) DEFAULT 0 COMMENT '是否逻辑删除 0:正常 1:删除',
