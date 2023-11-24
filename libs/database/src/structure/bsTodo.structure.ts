@@ -26,7 +26,7 @@ export class BsTodoGroup {
   @Column('int', {
     name: 'catalogue_id',
     nullable: true,
-    comment: '目录id,有这个id就是目录,没有就是todo列表',
+    comment: '目录id,有这个id就是目录,没有就是列表',
     unsigned: true,
   })
   catalogue_id: number | null;
@@ -48,14 +48,6 @@ export class BsTodoGroup {
   title: string | null;
 
   @Column('int', {
-    name: 'count',
-    comment: '子项数量',
-    unsigned: true,
-    default: () => "'0'",
-  })
-  count: number;
-
-  @Column('int', {
     name: 'order_prev_id',
     nullable: true,
     comment: '排序上一个的id,没有这个id就是第一个',
@@ -69,7 +61,15 @@ export class BsTodoGroup {
     default: () => 'CURRENT_TIMESTAMP',
     transformer: datetimeTransformer,
   })
-  create_time: string;
+  create_time: Date;
+
+  @Column('datetime', {
+    name: 'update_time',
+    comment: '更新时间',
+    default: () => 'CURRENT_TIMESTAMP',
+    transformer: datetimeTransformer,
+  })
+  update_time: Date;
 
   @Column('tinyint', {
     name: 'logic_delete',
@@ -86,9 +86,7 @@ export interface BsTodoGroupPo {
   catalogue_id?: number;
   icon?: string;
   title: string;
-  count: number;
   order_prev_id?: number;
-  create_time: string;
 }
 
 export type PBsTodoGroupPo = Promise<BsTodoGroupPo>;
@@ -120,14 +118,6 @@ export class BsTodoItem {
 
   @Column('int', { name: 'group_id', comment: '分组id', unsigned: true })
   group_id: number;
-
-  @Column('varchar', {
-    name: 'icon',
-    nullable: true,
-    comment: 'icon',
-    length: 20,
-  })
-  icon: string | null;
 
   @Column('varchar', {
     name: 'title',
@@ -168,6 +158,14 @@ export class BsTodoItem {
   })
   add_today_date: string | null;
 
+  @Column('int', {
+    name: 'order_prev_id',
+    nullable: true,
+    comment: '排序上一个的id,没有这个id就是第一个',
+    unsigned: true,
+  })
+  order_prev_id: number | null;
+
   @Column('datetime', {
     name: 'create_time',
     comment: '创建时间',
@@ -175,6 +173,14 @@ export class BsTodoItem {
     transformer: datetimeTransformer,
   })
   create_time: Date;
+
+  @Column('datetime', {
+    name: 'update_time',
+    comment: '更新时间',
+    default: () => 'CURRENT_TIMESTAMP',
+    transformer: datetimeTransformer,
+  })
+  update_time: Date;
 
   @Column('tinyint', {
     name: 'logic_delete',
@@ -228,6 +234,14 @@ export class BsTodoStep {
   @Column('int', { name: 'item_id', comment: '分组id', unsigned: true })
   item_id: number;
 
+  @Column('varchar', {
+    name: 'title',
+    nullable: true,
+    comment: '标题',
+    length: 50,
+  })
+  title: string | null;
+
   @Column('int', {
     name: 'is_finish',
     comment: '是否完成',
@@ -236,6 +250,14 @@ export class BsTodoStep {
   })
   is_finish: number;
 
+  @Column('int', {
+    name: 'order_prev_id',
+    nullable: true,
+    comment: '排序上一个的id,没有这个id就是第一个',
+    unsigned: true,
+  })
+  order_prev_id: number | null;
+
   @Column('datetime', {
     name: 'create_time',
     comment: '创建时间',
@@ -243,6 +265,14 @@ export class BsTodoStep {
     transformer: datetimeTransformer,
   })
   create_time: Date;
+
+  @Column('datetime', {
+    name: 'update_time',
+    comment: '更新时间',
+    default: () => 'CURRENT_TIMESTAMP',
+    transformer: datetimeTransformer,
+  })
+  update_time: Date;
 
   @Column('tinyint', {
     name: 'logic_delete',

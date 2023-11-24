@@ -1,40 +1,37 @@
 import { BsTodoDaoService } from '@database/dao/bs.todo.dao.service';
-import { PBsTodoGroupPos } from '@database/structure';
+import { BsTodoGroupPo, PBsTodoGroupPo, PBsTodoGroupPos } from '@database/structure';
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import {
-  GroupAddDto,
-  GroupDeleteDto,
-  GroupEditDto,
-  GroupListDto,
-  GroupMoveDto,
-} from './dto&vo/bs.todo.dto';
-import { BusinessRepositoryService } from '@database/dao';
+import { baseExceptionCheck } from 'src/share/util/exception.util';
+import { GroupAddDto, GroupDeleteDto, GroupListDto, GroupMoveDto } from './dto&vo/bs.todo.dto';
 
 @ApiTags('api.bs.todo.group')
 @Controller('/api/bs/todo/group')
 export class BsTodoGroupController {
-  constructor(
-    private bsTodoDaoService: BsTodoDaoService,
-    private business: BusinessRepositoryService,
-  ) {}
+  constructor(private bsTodoDaoService: BsTodoDaoService) {}
 
   @ApiBody({
     description: '分组&列表 添加',
     type: GroupAddDto,
   })
   @Post('add')
-  async groupAdd(@Body() group: GroupAddDto): Promise<void> {
-    await this.business.todoGroup.save(group);
+  async groupAdd(@Body() dto: GroupAddDto): PBsTodoGroupPo {
+    if (dto.order_prev_id) {
+      baseExceptionCheck(
+        !!(await this.bsTodoDaoService.findOne({ order_prev_id: dto.order_prev_id })),
+        '排序异常',
+      );
+    }
+
+    return await this.bsTodoDaoService.saveGroup(dto);
   }
 
   @ApiBody({
     description: '分组&列表 编辑',
-    type: GroupEditDto,
   })
   @Post('edit')
-  async groupEdit(@Body() group: GroupEditDto): Promise<void> {
-    await this.bsTodoDaoService.saveGroup(group);
+  async groupEdit(@Body() dto: Partial<BsTodoGroupPo>): Promise<void> {
+    await this.bsTodoDaoService.saveGroup(dto);
   }
 
   @ApiBody({
@@ -61,6 +58,7 @@ export class BsTodoGroupController {
   })
   @Post('move')
   async move(@Body() { target_id, move_id }: GroupMoveDto): PBsTodoGroupPos {
+    // TODO
     // 先拿出来，在插入进入
     return await this.bsTodoDaoService.findGroupsAboutMove(target_id, move_id);
   }
