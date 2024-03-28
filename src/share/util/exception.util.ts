@@ -1,5 +1,5 @@
 import { BaseException } from '../httpException';
 
-export function baseExceptionCheck(isTrue: boolean, message = ''): void {
-  if (isTrue) throw new BaseException(message);
+export function baseExceptionCheck(checkResult: boolean, message = ''): void {
+  if (checkResult) throw new BaseException(message);
 }

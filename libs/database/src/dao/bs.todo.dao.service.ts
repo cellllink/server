@@ -36,7 +36,7 @@ export class BsTodoDaoService implements BsTodoDaoServiceImpl {
 
   async deleteGroup(id: number) {
     const group = await this.findOne({ id });
-    baseExceptionCheck(!group, `该id为${id}的数据不存在`);
+    baseExceptionCheck(!!group, `该id为${id}的数据不存在`);
 
     // 将当前设置删除
     await this.saveGroup({
