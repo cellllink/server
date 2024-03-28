@@ -16,3 +16,5 @@ db:
     database: cellink
 
   mongoose: mongodb://care:care@115.29.243.9/cell
+
+  redis: redis://xxx.xxx.xxx.xxx:6379

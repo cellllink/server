@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AuthService {
+export class LoginService {
   private registerDefaultNames = ['红细胞', '白细胞', '血小板'];
 
   constructor() {}

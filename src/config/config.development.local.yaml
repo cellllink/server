@@ -16,3 +16,5 @@ db:
     database: xxxx
 
   mongoose: mongodb://care:care@xxx.xx.xxx.x/xxxx
+
+  redis: redis://xxx.xxx.xxx.xxx:6379

@@ -4,15 +4,15 @@ import { LoginDto, RegisterDto } from './dto&vo/auth.dto';
 import { CoUserDaoService } from '@database/dao';
 import { encryptPasswordBySalt, makeSalt } from 'src/share/util/cryptogram.util';
 import { baseExceptionCheck } from 'src/share/util/exception.util';
-import { CoUserPo, PCoUserPo } from '@database/structure';
+import { CoUserPo } from '@database/structure';
 import { PVoid } from 'src/share/type/common.type';
 import { LoginVo } from './dto&vo/auth.vo';
-import { AuthService } from './service/auth.service';
+import { LoginService } from './service/login.service';
 
 @ApiTags('ApiAuth')
 @Controller('/api/auth')
-export class AuthController {
-  constructor(private coUserDaoService: CoUserDaoService, private authService: AuthService) {}
+export class LoginController {
+  constructor(private coUserDaoService: CoUserDaoService, private loginService: LoginService) {}
 
   @ApiBody({
     description: '用户注册',
@@ -30,7 +30,7 @@ export class AuthController {
     newUser.account = account;
     newUser.password = hashPassword;
     newUser.salt = salt;
-    newUser.name = this.authService.getDefaultName();
+    newUser.name = this.loginService.getDefaultName();
     await this.coUserDaoService.save(newUser);
   }
 

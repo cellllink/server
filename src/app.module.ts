@@ -1,19 +1,22 @@
 import { Module } from '@nestjs/common';
-import { join } from 'path';
 
 // 配置
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService, TypeOrmConfigService } from './share/services';
+import { RedisModule } from '@nestjs-modules/ioredis';
+import { RedisConfigService } from './share/services/config/redis-config.service';
+
+import { ShareModule } from './share/share.module';
+import { DatabaseModule } from '@database/database.module';
 
 // 业务 modules
-import { ShareModule } from './share/share.module';
+import { OAuthModule } from './oauth/oauth.module';
 import { ApiModule } from './api/api.module';
+
 import { TestModule } from './test/test.module';
-import { DatabaseModule } from '@database/database.module';
 
 @Module({
   imports: [
@@ -25,29 +28,27 @@ import { DatabaseModule } from '@database/database.module';
       load: [configuration],
     }),
 
-    // 静态资源配置
-    // TODO 此处配置还有问题
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, 'static'),
-      serveRoot: '/static',
-      exclude: ['/api*', 'mini*', 'open*'],
-    }),
-
     // 数据库 Mysql 配置
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
     }),
 
     // 数据库 Mongoose 配置
-    // MongooseModule.forRootAsync({
-    //   useClass: MongooseConfigService,
-    // }),
+    MongooseModule.forRootAsync({
+      useClass: MongooseConfigService,
+    }),
+
+    // 数据库 Redis 配置
+    RedisModule.forRootAsync({
+      useClass: RedisConfigService,
+    }),
 
     // 共享模块
     ShareModule,
     DatabaseModule,
 
     // 业务模块
+    OAuthModule,
     ApiModule,
     TestModule,
   ],
