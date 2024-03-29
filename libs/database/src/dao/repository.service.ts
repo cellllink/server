@@ -12,6 +12,9 @@ import {
   BsTodoItem,
   BsTodoStep,
 } from '../structure';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { TestDocument } from '@database/structure/test.structure';
 
 @Injectable()
 export class CoreRepositoryService {
@@ -35,7 +38,10 @@ export class CoreRepositoryService {
 
 @Injectable()
 export class CommonRepositoryService {
-  constructor() {} // public readonly group: Repository<ComGroup>, // @InjectRepository(ComGroup)
+  constructor(
+    @InjectModel('TestSchema')
+    public readonly test: Model<TestDocument>,
+  ) {} // public readonly group: Repository<ComGroup>, // @InjectRepository(ComGroup)
 }
 
 @Injectable()

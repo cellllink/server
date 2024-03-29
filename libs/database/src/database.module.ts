@@ -24,6 +24,8 @@ import {
   BsTodoItem,
   BsTodoStep,
 } from './structure';
+import { TestSchema } from './structure/test.structure';
+import { MongooseModule } from '@nestjs/mongoose';
 // import { ComGroup } from './structure';
 // import { BsDefect, BsDefectProject } from './structure';
 
@@ -62,6 +64,13 @@ const DaoServices = [
       BsTodoGroup,
       BsTodoItem,
       BsTodoStep,
+    ]),
+
+    MongooseModule.forFeature([
+      {
+        name: 'TestSchema',
+        schema: TestSchema,
+      },
     ]),
   ],
   providers: [].concat(DaoServices),

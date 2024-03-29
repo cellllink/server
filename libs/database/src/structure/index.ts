@@ -3,7 +3,7 @@ export * from './coOrganization.structure';
 export * from './coTeam.structure';
 export * from './coProduct.structure';
 
-export * from './comGroup.stucture';
+export * from './comGroup.structure';
 
 export * from './bsDefect.structure';
 export * from './bsTodo.structure';

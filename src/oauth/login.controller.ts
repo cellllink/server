@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { LoginDto, RegisterDto } from './dto&vo/auth.dto';
 import { CoUserDaoService } from '@database/dao';
@@ -8,11 +8,17 @@ import { CoUserPo } from '@database/structure';
 import { PVoid } from 'src/share/type/common.type';
 import { LoginVo } from './dto&vo/auth.vo';
 import { LoginService } from './service/login.service';
+import { JwtService } from '@nestjs/jwt';
+import { AuthGuard } from '@nestjs/passport';
 
-@ApiTags('OAuth', 'Login')
+@ApiTags('OAuth-Login')
 @Controller('/oauth/login')
 export class LoginController {
-  constructor(private coUserDaoService: CoUserDaoService, private loginService: LoginService) {}
+  constructor(
+    private coUserDaoService: CoUserDaoService,
+    private jwtService: JwtService,
+    private loginService: LoginService,
+  ) {}
 
   @ApiBody({
     description: '用户登录',
@@ -22,12 +28,11 @@ export class LoginController {
   async login(@Body() { account, password }: LoginDto): Promise<LoginVo> {
     const user = await this.coUserDaoService.findUserByAccount(account);
 
-    baseExceptionCheck(!!user, '该账号不存在');
+    baseExceptionCheck(!user, '该账号不存在');
     baseExceptionCheck(user.password !== encryptPasswordBySalt(password, user.salt), '密码错误');
 
     return {
-      user: await this.coUserDaoService.findUserById(user.id),
-      token: '',
+      token: this.jwtService.sign({ user_id: user.id }),
     };
   }
 
@@ -50,4 +55,13 @@ export class LoginController {
     newUser.name = this.loginService.getDefaultName();
     await this.coUserDaoService.save(newUser);
   }
+
+  // @ApiBody({
+  //   description: 'test',
+  // })
+  // @UseGuards(AuthGuard('jwt'))
+  // @Post('test')
+  // async test(@Req() { user }: JwtHeaderUserInfo): PVoid {
+  //   console.log(user);
+  // }
 }

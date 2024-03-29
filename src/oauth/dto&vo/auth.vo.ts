@@ -1,6 +1,6 @@
-import { CoUserPo } from '@database/structure';
+// import { CoUserPo } from '@database/structure';
 
 export class LoginVo {
-  user: CoUserPo;
-  token: '';
+  // user: CoUserPo;
+  token: string;
 }

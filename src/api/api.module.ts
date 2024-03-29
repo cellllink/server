@@ -1,7 +1,4 @@
 import { Module } from '@nestjs/common';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-import { JWTConstant } from 'src/share/constant/auth.constant';
 
 import { ComController } from './com.controller';
 
@@ -15,13 +12,7 @@ import { BsTodoControllers } from './bs.todo.controller';
 const BsControllers = [BsDefectController, ...BsTodoControllers];
 
 @Module({
-  imports: [
-    PassportModule,
-    JwtModule.register({
-      secret: JWTConstant.secret,
-      signOptions: { expiresIn: '24h' }, // 过期时间 24 小时
-    }),
-  ],
+  imports: [],
   controllers: [
     CoUserController,
     CoOrganizationController,
