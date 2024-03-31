@@ -7,10 +7,6 @@
       {
         "include": "./config/*.yaml",
         "outDir": "./dist/src"
-      },
-      {
-        "include": "../static/*",
-        "outDir": "./dist/src/static"
       }
     ],
     "webpack": true
