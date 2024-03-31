@@ -9,12 +9,12 @@ http:
 # 数据库
 db:
   mysql:
-    host: xxx.xx.xxx.x
+    host: 114.115.208.175
     port: 3306
-    username: xxxx
-    password: xxxx
-    database: xxxx
+    username: root
+    password: yunfuwuxiaoguanjia
+    database: cellink
 
-  mongoose: mongodb://care:care@xxx.xx.xxx.x/xxxx
+  mongoose: mongodb+srv://root:root@celllink.8zznxkj.mongodb.net/celllink
 
-  redis: redis://xxx.xxx.xxx.xxx:6379
+  redis: redis://114.115.208.175:6379
