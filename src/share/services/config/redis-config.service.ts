@@ -9,7 +9,7 @@ export class RedisConfigService implements RedisModuleOptionsFactory {
   createRedisModuleOptions(): RedisSingleOptions {
     return {
       type: 'single',
-      url: this.configService.get('db.redis'),
+      url: this.configService.get('db.redis.url'),
     };
   }
 }

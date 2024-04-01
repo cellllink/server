@@ -8,7 +8,7 @@
 /bazel-out
 
 # environments
-src/config/config.development.yaml
+.env.dev
 
 # tempEntities
 src/daos/tempEntities

@@ -1,8 +1,25 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import * as yaml from 'js-yaml';
+export const configuration = () => ({
+  mode: process.env.mode,
 
-export default () =>
-  yaml.load(
-    readFileSync(join(__dirname, `src/config/config.${process.env.NODE_ENV}.yaml`), 'utf8'),
-  );
+  serve: {
+    port: parseInt(process.env.serve_port),
+  },
+
+  db: {
+    mysql: {
+      host: process.env.db_mysql_host,
+      port: parseInt(process.env.db_mysql_port),
+      username: process.env.db_mysql_username,
+      password: process.env.db_mysql_password,
+      database: process.env.db_mysql_database,
+    },
+
+    mongoose: {
+      uri: process.env.db_mongoose_uri,
+    },
+
+    redis: {
+      url: process.env.db_redis_url,
+    },
+  },
+});

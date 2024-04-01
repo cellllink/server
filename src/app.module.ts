@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 
 // 配置
 import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService, TypeOrmConfigService } from './share/services';
@@ -17,13 +16,16 @@ import { OAuthModule } from './oauth/oauth.module';
 import { ApiModule } from './api/api.module';
 
 import { TestModule } from './test/test.module';
+import { configuration } from './config/configuration';
+
+console.log(process.env.NODE_ENV);
 
 @Module({
   imports: [
     // 环境变量 配置文件
     ConfigModule.forRoot({
-      isGlobal: true,
       cache: true,
+      isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
       load: [configuration],
     }),

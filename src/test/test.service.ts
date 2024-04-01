@@ -5,12 +5,12 @@ import { CommonRepositoryService } from '@database/dao';
 
 @Injectable()
 export class TestService {
-  constructor(
-    @InjectRedis() private readonly redis: Redis,
-    private commonRepositoryService: CommonRepositoryService,
-  ) {
-    this.test();
-  }
+  // constructor(
+  //   @InjectRedis() private readonly redis: Redis,
+  //   private commonRepositoryService: CommonRepositoryService,
+  // ) {
+  //   this.test();
+  // }
 
   async test() {
     // await this.redis.set('cellink_test', 2);
