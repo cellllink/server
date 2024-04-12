@@ -7,16 +7,17 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService, TypeOrmConfigService } from './share/services';
 import { RedisModule } from '@nestjs-modules/ioredis';
 import { RedisConfigService } from './share/services/config/redis-config.service';
+import { configuration } from './config/configuration';
 
 import { ShareModule } from './share/share.module';
 import { DatabaseModule } from '@database/database.module';
 
 // 业务 modules
 import { OAuthModule } from './oauth/oauth.module';
-import { ApiModule } from './api/api.module';
+import { SpaceModule } from './space/space.module';
 
+import { ApiModule } from './api/api.module';
 import { TestModule } from './test/test.module';
-import { configuration } from './config/configuration';
 
 @Module({
   imports: [
@@ -49,6 +50,8 @@ import { configuration } from './config/configuration';
 
     // 业务模块
     OAuthModule,
+    SpaceModule,
+
     ApiModule,
     TestModule,
   ],
