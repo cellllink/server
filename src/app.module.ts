@@ -18,8 +18,6 @@ import { ApiModule } from './api/api.module';
 import { TestModule } from './test/test.module';
 import { configuration } from './config/configuration';
 
-console.log(process.env.NODE_ENV);
-
 @Module({
   imports: [
     // 环境变量 配置文件
