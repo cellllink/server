@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-// import { SocketIoModule } from '@nestjs/platform-socket.io';
+import { EventGateway } from './event.gateway';
 
 @Module({
-  // imports: [SocketIoModule.forRoot({})],
   controllers: [],
-  providers: [],
+  providers: [EventGateway],
 })
 export class SpaceModule {}
