@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { EventGateway } from './event.gateway';
+import { DemandGateway } from './gateway/demand.gateway';
+
+const Gateways = [DemandGateway];
 
 @Module({
   controllers: [],
-  providers: [EventGateway],
+  providers: [...Gateways],
 })
 export class SpaceModule {}
