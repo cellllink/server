@@ -8,8 +8,9 @@ import {
   CoUserDaoService,
   CoOrganizationDaoService,
   CoTeamDaoService,
-  CommonDaoServcie,
   BsTodoDaoService,
+  CommonTagDaoServcie,
+  CommonGroupDaoServcie,
 } from './dao';
 
 import {
@@ -35,11 +36,12 @@ const DaoServices = [
   CommonRepositoryService,
   BusinessRepositoryService,
 
+  CommonGroupDaoServcie,
+  CommonTagDaoServcie,
+
   CoUserDaoService,
   CoOrganizationDaoService,
   CoTeamDaoService,
-
-  CommonDaoServcie,
 
   BsTodoDaoService,
 ];

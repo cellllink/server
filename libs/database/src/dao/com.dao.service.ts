@@ -37,7 +37,7 @@ export class CommonGroupDaoServcie implements ComGroupDaoServiceImpl {
 
   async remove(belong_uuid: string, id: number): PVoid {
     const group = await this.findOne(belong_uuid, id);
-    this.repository.group.update({ ...group, logic_delete: 1 });
+    // this.repository.group.update({ ...group, logic_delete: 1 });
   }
 }
 
