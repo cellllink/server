@@ -2,19 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import {
-  CoUser,
-  CoOrganization,
-  CoOrganizationUser,
-  CoTeam,
-  CoTeamUser,
-  BsTodoGroup,
-  BsTodoItem,
-  BsTodoStep,
-} from '../structure';
+import { CoUser, CoOrganization, CoOrganizationUser, CoTeam, CoTeamUser, BsTodoGroup, BsTodoItem, BsTodoStep } from '../structure';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { TestDocument } from '@database/structure/test.structure';
+
+import { ComGroup } from '@database/structure/common/comGroup.structure';
+import { ComTag } from '@database/structure/common/comTag.structure';
 
 @Injectable()
 export class CoreRepositoryService {
@@ -39,9 +33,15 @@ export class CoreRepositoryService {
 @Injectable()
 export class CommonRepositoryService {
   constructor(
-    @InjectModel('TestSchema')
-    public readonly test: Model<TestDocument>,
-  ) {} // public readonly group: Repository<ComGroup>, // @InjectRepository(ComGroup)
+    // @InjectModel('TestSchema')
+    // public readonly test: Model<TestDocument>,
+
+    @InjectRepository(ComGroup)
+    public readonly group: Repository<ComGroup>,
+
+    @InjectRepository(ComTag)
+    public readonly tag: Repository<ComTag>,
+  ) {}
 }
 
 @Injectable()

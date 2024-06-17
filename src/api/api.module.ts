@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { ComController } from './com.controller';
+import { ComGroupController } from './com.group.controller';
 
 import { CoUserController } from './co.user.controller';
 import { CoOrganizationController } from './co.organization.controller';
@@ -18,7 +18,7 @@ const BsControllers = [BsDefectController, ...BsTodoControllers];
     CoOrganizationController,
     CoTeamController,
 
-    ComController,
+    ComGroupController,
 
     // BsDefectController,
     ...BsControllers,

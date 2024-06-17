@@ -55,13 +55,4 @@ export class LoginController {
     newUser.name = this.loginService.getDefaultName();
     await this.coUserDaoService.save(newUser);
   }
-
-  // @ApiBody({
-  //   description: 'test',
-  // })
-  // @UseGuards(AuthGuard('jwt'))
-  // @Post('test')
-  // async test(@Req() { user }: JwtHeaderUserInfo): PVoid {
-  //   console.log(user);
-  // }
 }

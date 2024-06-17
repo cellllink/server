@@ -1,12 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import {
-  BsTodoGroup,
-  BsTodoGroupPo,
-  PBsTodoGroupPo,
-  PBsTodoGroupPos,
-} from '@database/structure/bsTodo.structure';
+import { BsTodoGroup, BsTodoGroupPo, PBsTodoGroupPo, PBsTodoGroupPos } from '@database/structure/bsTodo.structure';
 import { BusinessRepositoryService } from './repository.service';
-import { LogicDeleteStatusEnum } from '@database/share/enum/common.enum';
 import { FindOptionsWhere, In } from 'typeorm';
 import { baseExceptionCheck } from 'src/share/util/exception.util';
 
@@ -25,7 +19,7 @@ export class BsTodoDaoService implements BsTodoDaoServiceImpl {
     return await this.business.todoGroup.findOne({
       where: {
         ...options,
-        logic_delete: LogicDeleteStatusEnum.normal,
+        logic_delete: 0,
       },
     });
   }
@@ -41,7 +35,7 @@ export class BsTodoDaoService implements BsTodoDaoServiceImpl {
     // 将当前设置删除
     await this.saveGroup({
       id,
-      logic_delete: LogicDeleteStatusEnum.deleted,
+      logic_delete: 0,
     });
     // 将下一条的数据的 order_prev_id 设置为 待删除的 order_prev_id，如果不存在就是第一条了
     const nextGroup = await this.findOne({ order_prev_id: id });
@@ -57,7 +51,7 @@ export class BsTodoDaoService implements BsTodoDaoServiceImpl {
     return await this.business.todoGroup.find({
       where: {
         scene_uuid,
-        logic_delete: LogicDeleteStatusEnum.normal,
+        logic_delete: 0,
       },
     });
   }

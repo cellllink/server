@@ -40,9 +40,9 @@ import { TestModule } from './test/test.module';
     }),
 
     // 数据库 Redis 配置
-    RedisModule.forRootAsync({
-      useClass: RedisConfigService,
-    }),
+    // RedisModule.forRootAsync({
+    //   useClass: RedisConfigService,
+    // }),
 
     // 共享模块
     ShareModule,

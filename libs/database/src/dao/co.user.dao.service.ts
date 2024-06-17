@@ -11,7 +11,6 @@ import {
 } from '@database/structure';
 import { CoreRepositoryService } from './repository.service';
 import { FindOptionsSelectByString, In } from 'typeorm';
-import { LogicDeleteStatusEnum } from '@database/share/enum/common.enum';
 
 export interface CoUserDaoServiceImpl {
   // 创建编辑用户信息
@@ -38,12 +37,7 @@ export interface CoUserDaoServiceImpl {
 
 @Injectable()
 export class CoUserDaoService implements CoUserDaoServiceImpl {
-  private userSelectBaseOptions: FindOptionsSelectByString<CoUser> = [
-    'id',
-    'name',
-    'avatar',
-    'sex',
-  ];
+  private userSelectBaseOptions: FindOptionsSelectByString<CoUser> = ['id', 'name', 'avatar', 'sex'];
 
   constructor(private core: CoreRepositoryService) {}
 
@@ -54,7 +48,7 @@ export class CoUserDaoService implements CoUserDaoServiceImpl {
   async delete(userId: number) {
     await this.core.user.save({
       id: userId,
-      logic_delete: LogicDeleteStatusEnum.deleted,
+      logic_delete: 1,
     });
   }
 
@@ -78,10 +72,7 @@ export class CoUserDaoService implements CoUserDaoServiceImpl {
     });
   }
 
-  async findUserOrganizations(
-    userId: number,
-    status = CoOrganizationUserStatusEnum.onJob,
-  ): PCoOrganizationPos {
+  async findUserOrganizations(userId: number, status = CoOrganizationUserStatusEnum.onJob): PCoOrganizationPos {
     const organizationUsers = await this.core.organizationUser.find({
       where: { user_id: userId, status },
     });
