@@ -37,7 +37,7 @@ interface CoUserDaoServiceImpl {
 
 @Injectable()
 export class CoUserDaoService implements CoUserDaoServiceImpl {
-  private userSelectBaseOptions: FindOptionsSelectByString<CoUser> = ['id', 'name', 'avatar', 'sex'];
+  private userSelectBaseOptions: FindOptionsSelectByString<CoUser> = ['id', 'name', 'avatar', 'phone', 'sex'];
 
   constructor(private coreRepository: CoreRepository) {}
 

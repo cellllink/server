@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { configuration } from './config/configuration';
+import { configuration } from './config';
 
 // 配置
 import { MongooseConfigService, TypeOrmConfigService } from './share/services';
@@ -14,6 +14,7 @@ import { MongooseConfigService, TypeOrmConfigService } from './share/services';
 
 // // 业务 modules
 import { OAuthModule } from './oauth/oauth.module';
+import { CommonModule } from './common/common.module';
 // import { SpaceModule } from './space/space.module';
 
 // import { ApiModule } from './api/api.module';
@@ -47,6 +48,7 @@ import { OAuthModule } from './oauth/oauth.module';
 
     // 业务模块
     OAuthModule,
+    CommonModule,
   ],
   providers: [],
 })

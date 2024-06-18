@@ -1,15 +1,11 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { LoginDto, RegisterDto } from './dto&vo/auth.dto';
 import { CoUserDaoService } from '@database/dao';
-import { encryptPasswordBySalt, makeSalt } from 'src/share/util/cryptogram.util';
+import { encryptPasswordBySalt } from 'src/share/util/cryptogram.util';
 import { baseExceptionCheck } from 'src/share/util/exception.util';
-import { CoUserPo } from '@database/structure/core';
-import { PVoid } from 'src/share/type/common.type';
-import { LoginVo } from './dto&vo/auth.vo';
-import { LoginService } from './service/login.service';
+import { LoginVo } from './dtovo/login.vo';
 import { JwtService } from '@nestjs/jwt';
-import { AuthGuard } from '@nestjs/passport';
+import { AccountDto } from './dtovo/login.dto';
 
 @ApiTags('OAuth-Login')
 @Controller('/oauth/login')
@@ -17,15 +13,14 @@ export class LoginController {
   constructor(
     private coUserDaoService: CoUserDaoService,
     private jwtService: JwtService,
-    private loginService: LoginService,
   ) {}
 
   @ApiBody({
-    description: '用户登录',
-    type: LoginDto,
+    description: '账号密码登录',
+    type: AccountDto,
   })
-  @Post('/')
-  async login(@Body() { account, password }: LoginDto): Promise<LoginVo> {
+  @Post('/account')
+  async login(@Body() { account, password }: AccountDto): Promise<LoginVo> {
     const user = await this.coUserDaoService.findUserByAccount(account);
 
     baseExceptionCheck(!user, '该账号不存在');
@@ -34,25 +29,5 @@ export class LoginController {
     return {
       token: this.jwtService.sign({ user_id: user.id }),
     };
-  }
-
-  @ApiBody({
-    description: '用户注册',
-    type: RegisterDto,
-  })
-  @Post('register')
-  async register(@Body() { account, password }: RegisterDto): PVoid {
-    const user = await this.coUserDaoService.findUserByAccount(account);
-    baseExceptionCheck(!!user, '该账号已存在');
-
-    const salt = makeSalt(); // 制作密码盐
-    const hashPassword = encryptPasswordBySalt(password, salt); // 加密密码
-
-    const newUser = new CoUserPo();
-    newUser.account = account;
-    newUser.password = hashPassword;
-    newUser.salt = salt;
-    newUser.name = this.loginService.getDefaultName();
-    await this.coUserDaoService.save(newUser);
   }
 }

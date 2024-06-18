@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { CustomLogger } from './share/services';
 import { HttpInterceptor } from './share/http.interceptor';
-import { setSwaager } from './config/swagger.config';
+import { setSwaager } from './config';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
