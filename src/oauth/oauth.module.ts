@@ -4,9 +4,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { LoginController } from './login.controller';
 import { LoginService } from './service/login.service';
 import { JwtStrategyService } from 'src/share/services/common/jwt.strategy.service';
+import { DatabaseModule } from '@database/database.module';
 
 @Module({
   imports: [
+    DatabaseModule,
     PassportModule,
     JwtModule.register({
       secret: 'cellinkPrivateKey',

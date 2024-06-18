@@ -15,7 +15,6 @@ const Repositories = [EntityManager, CoreRepository, CommonRepository, BusinessR
 const CoDaoServices = [CoUserDaoService, CoOrganizationDaoService, CoTeamDaoService];
 const ComDaoServices = [CommonTagDaoServcie, CommonGroupDaoServcie];
 
-@Global()
 @Module({
   imports: [TypeOrmModule.forFeature([CoUser, CoOrganization, CoOrganizationUser, CoOrganizationTeam, CoTeam, CoTeamUser, ComGroup, ComTag])],
   providers: [...Repositories, ...CoDaoServices, ...ComDaoServices],
