@@ -1,22 +1,23 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-// 配置
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { MongooseConfigService, TypeOrmConfigService } from './share/services';
-import { RedisModule } from '@nestjs-modules/ioredis';
-import { RedisConfigService } from './share/services/config/redis-config.service';
+
 import { configuration } from './config/configuration';
 
-import { ShareModule } from './share/share.module';
+// 配置
+// import { MongooseConfigService, TypeOrmConfigService } from './share/services';
+// import { RedisModule } from '@nestjs-modules/ioredis';
+// import { RedisConfigService } from './share/services/config/redis-config.service';
 
-// 业务 modules
-import { OAuthModule } from './oauth/oauth.module';
-import { SpaceModule } from './space/space.module';
+// import { ShareModule } from './share/share.module';
 
-import { ApiModule } from './api/api.module';
-import { TestModule } from './test/test.module';
+// // 业务 modules
+// import { OAuthModule } from './oauth/oauth.module';
+// import { SpaceModule } from './space/space.module';
+
+// import { ApiModule } from './api/api.module';
+// import { TestModule } from './test/test.module';
 
 @Module({
   imports: [
