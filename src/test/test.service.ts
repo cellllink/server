@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Redis } from 'ioredis';
-import { InjectRedis } from '@nestjs-modules/ioredis';
-import { CommonRepositoryService } from '@database/dao';
+// import { Redis } from 'ioredis';
+// import { InjectRedis } from '@nestjs-modules/ioredis';
+// import { CommonRepositoryService } from '@database/dao';
 
 @Injectable()
 export class TestService {

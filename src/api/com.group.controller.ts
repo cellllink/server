@@ -12,16 +12,16 @@ export class ComGroupController {
   @ApiBody({
     description: '',
   })
-  @Post('list/:belong_uuid')
-  async list(@Param() { belong_uuid }: any): PComGroupPos {
-    return this.commonGroupDaoServcie.find(belong_uuid);
+  @Post('list/:owner_uuid')
+  async list(@Param() { owner_uuid }: any): PComGroupPos {
+    return this.commonGroupDaoServcie.find(owner_uuid);
   }
 
   @ApiBody({
     description: '',
   })
-  @Post('edit/:belong_uuid')
-  async groupDelete(@Param() { belong_uuid }: any, @Body() { id }: any): PVoid {
-    this.commonGroupDaoServcie.findOne(belong_uuid, id);
+  @Post('edit/:owner_uuid')
+  async groupDelete(@Param() { owner_uuid }: any, @Body() { id }: any): PVoid {
+    this.commonGroupDaoServcie.findOne(owner_uuid, id);
   }
 }

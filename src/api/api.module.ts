@@ -9,7 +9,7 @@ import { CoTeamController } from './co.team.controller';
 import { BsDefectController } from './bs.defect.controller';
 import { BsTodoControllers } from './bs.todo.controller';
 
-const BsControllers = [BsDefectController, ...BsTodoControllers];
+// const BsControllers = [BsDefectController, ...BsTodoControllers];
 
 @Module({
   imports: [],
@@ -21,7 +21,7 @@ const BsControllers = [BsDefectController, ...BsTodoControllers];
     ComGroupController,
 
     // BsDefectController,
-    ...BsControllers,
+    // ...BsControllers,
   ],
   providers: [],
 })

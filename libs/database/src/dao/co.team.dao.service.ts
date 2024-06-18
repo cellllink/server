@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CoTeamUserStatusEnum, PCoTeamPo, PCoUserPo, PCoUserPos } from '@database/structure';
+import { CoTeamUserStatusEnum, PCoTeamPo, PCoUserPo, PCoUserPos } from '@database/structure/core';
 
-export interface CoTeamDaoServiceImpl {
+interface CoTeamDaoServiceImpl {
   // 通过 id 查询团队
   findTeamById(teamId: number): PCoTeamPo;
 

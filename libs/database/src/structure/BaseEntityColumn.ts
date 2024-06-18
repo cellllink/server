@@ -14,7 +14,7 @@ export class BaseEntityColumn {
   logic_delete: 0 | 1;
 }
 
-export interface BaseEntityPo {
+export class BaseEntityPo {
   id: number;
   create_time: Date;
   update_time: Date;

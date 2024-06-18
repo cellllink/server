@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { BaseEntityColumn, BaseEntityPo } from '../BaseEntityColumn';
+import { BaseEntityColumn, BaseEntityPo } from '../baseEntityColumn';
 
 /*
 CREATE TABLE `com_tag` (
@@ -12,7 +12,7 @@ CREATE TABLE `com_tag` (
     -- 独有字段
     `name` varchar(20) NOT NULL COMMENT '名称',
     `desc` varchar(200) NOT NULL DEFAULT '' COMMENT '描述',
-    `belong_uuid` varchar(32) NOT NULL COMMENT '32位的uuid',
+    `owner_uuid` varchar(32) NOT NULL COMMENT '32位的uuid',
 
     -- 主键 & 索引
     PRIMARY KEY (`id`)
@@ -27,16 +27,14 @@ export class ComTag extends BaseEntityColumn {
   @Column('varchar', { name: 'desc', comment: '描述', length: 200 })
   desc: string;
 
-  @Column('varchar', { name: 'belong_uuid', comment: '32位的uuid', length: 32 })
-  belong_uuid: string;
+  @Column('varchar', { name: 'owner_uuid', comment: '32位的uuid', length: 32 })
+  owner_uuid: string;
 }
 
-export interface ComTagPo extends BaseEntityPo {
+export class ComTagPo extends BaseEntityPo {
   name: string;
   desc: string;
-  belong_uuid: string;
+  owner_uuid: string;
 }
-
 export type PComTagPo = Promise<ComTagPo>;
-
 export type PComTagPos = Promise<ComTagPo[]>;

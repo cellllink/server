@@ -1,81 +1,24 @@
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import {
-  ManagerService,
-  CoreRepositoryService,
-  CommonRepositoryService,
-  BusinessRepositoryService,
-  CoUserDaoService,
-  CoOrganizationDaoService,
-  CoTeamDaoService,
-  BsTodoDaoService,
-  CommonTagDaoServcie,
-  CommonGroupDaoServcie,
-} from './dao';
 
-import {
-  CoUser,
-  CoOrganization,
-  CoOrganizationUser,
-  CoOrganizationTeam,
-  CoTeam,
-  CoTeamUser,
-  CoProduct,
-  BsTodoGroup,
-  BsTodoItem,
-  BsTodoStep,
-} from './structure';
-import { TestSchema } from './structure/test.structure';
-import { MongooseModule } from '@nestjs/mongoose';
-// import { ComGroup } from './structure';
-// import { BsDefect, BsDefectProject } from './structure';
+import { CoUser, CoOrganization, CoOrganizationUser, CoOrganizationTeam, CoTeam, CoTeamUser } from './structure/core';
+import { ComGroup, ComTag } from './structure/common';
 
-const DaoServices = [
-  ManagerService,
-  CoreRepositoryService,
-  CommonRepositoryService,
-  BusinessRepositoryService,
+import { EntityManager, CoreRepository, CommonRepository, BusinessRepository } from './dao';
+import { CoUserDaoService, CoOrganizationDaoService, CoTeamDaoService } from './dao';
+import { CommonTagDaoServcie, CommonGroupDaoServcie } from './dao';
 
-  CommonGroupDaoServcie,
-  CommonTagDaoServcie,
+// import { TestSchema } from './structure/test.structure';
+// import { MongooseModule } from '@nestjs/mongoose';
 
-  CoUserDaoService,
-  CoOrganizationDaoService,
-  CoTeamDaoService,
-
-  BsTodoDaoService,
-];
+const Repositories = [EntityManager, CoreRepository, CommonRepository, BusinessRepository];
+const CoDaoServices = [CoUserDaoService, CoOrganizationDaoService, CoTeamDaoService];
+const ComDaoServices = [CommonTagDaoServcie, CommonGroupDaoServcie];
 
 @Global()
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([
-      CoUser,
-      CoOrganization,
-      CoOrganizationUser,
-      CoOrganizationTeam,
-      CoTeam,
-      CoTeamUser,
-      CoProduct,
-
-      // ComGroup,
-
-      // BsDefect,
-      // BsDefectProject,
-
-      BsTodoGroup,
-      BsTodoItem,
-      BsTodoStep,
-    ]),
-
-    MongooseModule.forFeature([
-      {
-        name: 'TestSchema',
-        schema: TestSchema,
-      },
-    ]),
-  ],
-  providers: [].concat(DaoServices),
-  exports: [].concat(DaoServices),
+  imports: [TypeOrmModule.forFeature([CoUser, CoOrganization, CoOrganizationUser, CoOrganizationTeam, CoTeam, CoTeamUser, ComGroup, ComTag])],
+  providers: [...Repositories, ...CoDaoServices, ...ComDaoServices],
+  exports: [...Repositories, ...CoDaoServices, ...ComDaoServices],
 })
 export class DatabaseModule {}

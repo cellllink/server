@@ -4,7 +4,7 @@ import { LoginDto, RegisterDto } from './dto&vo/auth.dto';
 import { CoUserDaoService } from '@database/dao';
 import { encryptPasswordBySalt, makeSalt } from 'src/share/util/cryptogram.util';
 import { baseExceptionCheck } from 'src/share/util/exception.util';
-import { CoUserPo } from '@database/structure';
+import { CoUserPo } from '@database/structure/core';
 import { PVoid } from 'src/share/type/common.type';
 import { LoginVo } from './dto&vo/auth.vo';
 import { LoginService } from './service/login.service';
