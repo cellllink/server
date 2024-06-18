@@ -6,14 +6,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { configuration } from './config/configuration';
 
 // 配置
-// import { MongooseConfigService, TypeOrmConfigService } from './share/services';
+import { MongooseConfigService, TypeOrmConfigService } from './share/services';
 // import { RedisModule } from '@nestjs-modules/ioredis';
 // import { RedisConfigService } from './share/services/config/redis-config.service';
 
 // import { ShareModule } from './share/share.module';
 
 // // 业务 modules
-// import { OAuthModule } from './oauth/oauth.module';
+import { OAuthModule } from './oauth/oauth.module';
 // import { SpaceModule } from './space/space.module';
 
 // import { ApiModule } from './api/api.module';

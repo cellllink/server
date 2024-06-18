@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { BaseEntityPo } from '../baseEntityColumn';
+import { BaseEntityColumn, BaseEntityPo } from '../baseEntityColumn';
 
 /*
 CREATE TABLE `co_team` (
@@ -19,7 +19,7 @@ CREATE TABLE `co_team` (
 */
 
 @Entity('co_team', { schema: 'cellink' })
-export class CoTeam {
+export class CoTeam extends BaseEntityColumn {
   @Column('int', { name: 'owner_id', comment: '所有者id', unsigned: true })
   owner_id: number;
 
@@ -60,7 +60,7 @@ CREATE TABLE `co_team_user` (
 */
 
 @Entity('co_team_user', { schema: 'cellink' })
-export class CoTeamUser {
+export class CoTeamUser extends BaseEntityColumn {
   @Column('int', { name: 'team_id', comment: '团队id', unsigned: true })
   team_id: number;
 
