@@ -10,6 +10,8 @@ import {
   // POrgProductPo,
   // POrgProductPos,
 } from '@database/structure/core';
+import { CoreRepository } from './repository';
+import dayjs from 'dayjs';
 
 interface CoOrganizationDaoServiceImpl {
   // 通过 id 查询组织
@@ -36,6 +38,8 @@ interface CoOrganizationDaoServiceImpl {
 
 @Injectable()
 export class CoOrganizationDaoService implements CoOrganizationDaoServiceImpl {
+  constructor(private coreRepository: CoreRepository) {}
+
   findOrganizationById(organizationId: number): PCoOrganizationPo {
     return new Promise(() => {});
   }
@@ -63,4 +67,19 @@ export class CoOrganizationDaoService implements CoOrganizationDaoServiceImpl {
   // findOrganizationProducts(organizationId: number): POrgProductPos {
   //   return new Promise(() => {});
   // }
+
+  // 创建组织
+  async create(owner_user_id: number) {
+    const organization = await this.coreRepository.organization.save({
+      owner_user_id,
+      name: '',
+      logo: '',
+    });
+    await this.coreRepository.organizationUser.save({
+      organization_id: organization.id,
+      user_id: owner_user_id,
+      join_time: dayjs().format('YYYY-MM-DD mm:HH:ss'),
+      status: CoOrganizationUserStatusEnum.onJob,
+    });
+  }
 }

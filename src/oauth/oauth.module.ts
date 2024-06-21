@@ -9,6 +9,7 @@ import { LoginController } from './login.controller';
 
 import { LoginService } from './service/login.service';
 import { JwtStrategyService } from 'src/share/services/common/jwt.strategy.service';
+import { RegisterService } from './service/register.service';
 
 @Module({
   imports: [
@@ -21,6 +22,6 @@ import { JwtStrategyService } from 'src/share/services/common/jwt.strategy.servi
     }),
   ],
   controllers: [RegisterController, LoginController],
-  providers: [LoginService, JwtStrategyService],
+  providers: [LoginService, RegisterService, JwtStrategyService],
 })
 export class OAuthModule {}

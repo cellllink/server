@@ -1,4 +1,4 @@
-import { Controller, Param, Post } from '@nestjs/common';
+import { Controller, Headers, Post } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoUserDaoService } from '@database/dao';
 import { baseExceptionCheck } from 'src/share/util/exception.util';
@@ -13,7 +13,9 @@ export class UserController {
     description: '用户信息',
   })
   @Post('/info')
-  async login(): PCoUserPo {
+  async login(@Headers('Authorization') Authorization: string): PCoUserPo {
+    console.log(Authorization);
+
     const user = await this.coUserDaoService.findUserById(2);
 
     baseExceptionCheck(!user, '该账号不存在');

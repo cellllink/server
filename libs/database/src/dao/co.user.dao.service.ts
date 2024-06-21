@@ -12,39 +12,13 @@ import {
 import { CoreRepository } from './repository';
 import { FindOptionsSelectByString, In } from 'typeorm';
 
-interface CoUserDaoServiceImpl {
-  // 创建编辑用户信息
-  save(user: Partial<CoUserPo>): PCoUserPo;
-
-  // 删除用户
-  delete(userId: number): void;
-
-  // 通过账户查询用户
-  findUserByAccount(account: string): PCoUserPo;
-
-  // 通过 id 查询用户
-  findUserById(userId: number): PCoUserPo;
-
-  // 通过 id 查询用户列表
-  findUsersByIds(userIds: number[]): PCoUserPos;
-
-  // 查询用户的组织列表<默认用户在职的>
-  findUserOrganizations(userId: number, status?: CoOrganizationUserStatusEnum): PCoOrganizationPos;
-
-  // 查询用户的团队列表<默认用户加入的>
-  findUserTeams(userId: number, status?: CoTeamUserStatusEnum): PCoTeamPos;
-}
-
 @Injectable()
-export class CoUserDaoService implements CoUserDaoServiceImpl {
+export class CoUserDaoService {
   private userSelectBaseOptions: FindOptionsSelectByString<CoUser> = ['id', 'name', 'avatar', 'phone', 'sex'];
 
-  constructor(private coreRepository: CoreRepository) {}
+  constructor(public coreRepository: CoreRepository) {}
 
-  async save(user: Partial<CoUserPo>) {
-    return await this.coreRepository.user.save(user);
-  }
-
+  // 删除用户
   async delete(userId: number) {
     await this.coreRepository.user.save({
       id: userId,
@@ -52,12 +26,14 @@ export class CoUserDaoService implements CoUserDaoServiceImpl {
     });
   }
 
+  // 通过账户查询用户
   async findUserByAccount(account: string): PCoUserPo {
     return await this.coreRepository.user.findOne({
       where: { account, logic_delete: 0 },
     });
   }
 
+  // 通过 id 查询用户
   async findUserById(id: number): PCoUserPo {
     return await this.coreRepository.user.findOne({
       select: this.userSelectBaseOptions,
@@ -65,6 +41,7 @@ export class CoUserDaoService implements CoUserDaoServiceImpl {
     });
   }
 
+  // 通过 id 查询用户列表
   async findUsersByIds(ids: number[]): PCoUserPos {
     return await this.coreRepository.user.find({
       select: this.userSelectBaseOptions,
@@ -72,6 +49,7 @@ export class CoUserDaoService implements CoUserDaoServiceImpl {
     });
   }
 
+  // 查询用户的组织列表<默认用户在职的>
   async findUserOrganizations(userId: number, status = CoOrganizationUserStatusEnum.onJob): PCoOrganizationPos {
     const organizationUsers = await this.coreRepository.organizationUser.find({
       where: { user_id: userId, status },
@@ -81,6 +59,7 @@ export class CoUserDaoService implements CoUserDaoServiceImpl {
     });
   }
 
+  // 查询用户的团队列表<默认用户加入的>
   async findUserTeams(userId: number, status = CoTeamUserStatusEnum.in): PCoTeamPos {
     const teamUsers = await this.coreRepository.teamUser.find({
       where: { user_id: userId, status },

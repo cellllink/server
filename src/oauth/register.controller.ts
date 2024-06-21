@@ -1,19 +1,19 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { CoUserDaoService } from '@database/dao';
+import { CoOrganizationDaoService, CoUserDaoService, CoreRepository } from '@database/dao';
 import { encryptPasswordBySalt, makeSalt } from 'src/share/util/cryptogram.util';
 import { baseExceptionCheck } from 'src/share/util/exception.util';
 import { CoUserPo } from '@database/structure/core';
 import { PVoid } from 'src/share/type/common.type';
-import { LoginService } from './service/login.service';
 import { AccountDto } from './dtovo/register.dto';
 
 @ApiTags('OAuth-Register')
 @Controller('/oauth/register')
 export class RegisterController {
   constructor(
+    private coreRepository: CoreRepository,
     private coUserDaoService: CoUserDaoService,
-    private loginService: LoginService,
+    private coOrganizationDaoService: CoOrganizationDaoService,
   ) {}
 
   @ApiBody({
@@ -26,13 +26,14 @@ export class RegisterController {
     baseExceptionCheck(!!user, '该账号已存在');
 
     const salt = makeSalt(); // 制作密码盐
-    const hashPassword = encryptPasswordBySalt(password, salt); // 加密密码
 
-    const newUser = new CoUserPo();
-    newUser.account = account;
-    newUser.password = hashPassword;
-    newUser.salt = salt;
-    newUser.name = this.loginService.getDefaultName();
-    await this.coUserDaoService.save(newUser);
+    const newUser = await this.coreRepository.user.save({
+      account,
+      password: encryptPasswordBySalt(password, salt), // 加密密码;
+      salt,
+      name: '名称',
+    });
+
+    await this.coOrganizationDaoService.create(newUser.id);
   }
 }
