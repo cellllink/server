@@ -35,4 +35,8 @@ export const configuration = () => ({
       url: process.env.db_redis_url,
     },
   },
+
+  jwt: {
+    secret: process.env.jwt_secret,
+  },
 });

@@ -16,11 +16,11 @@ mode = prod
 
 serve_port = 80
 
-db_mysql_host = 114.115.208.175
 db_mysql_port = 3306
+db_mysql_host = 114.115.208.175
 db_mysql_username = root
 db_mysql_password = yunfuwuxiaoguanjia
-db_mysql_database = cellink
+db_mysql_database = celllink
 
 db_mongoose_uri = mongodb+srv://root:root@celllink.8zznxkj.mongodb.net/celllink
 
