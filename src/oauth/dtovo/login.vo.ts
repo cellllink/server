@@ -1,4 +1,4 @@
-export class LoginVo {
+export class ByAccountVo {
   // user: CoUserPo;
   token: string;
 }
