@@ -3,9 +3,9 @@ import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CoOrganizationDaoService, CoUserDaoService, CoreRepository } from '@database/dao';
 import { encryptPasswordBySalt, makeSalt } from 'src/share/util/cryptogram.util';
 import { baseExceptionCheck } from 'src/share/util/exception.util';
-import { CoUserPo } from '@database/structure/core';
 import { PVoid } from 'src/share/type/common.type';
-import { AccountDto } from './dtovo/register.dto';
+import { ByAccountDto } from './dtovo/register.dto';
+import { timer } from 'rxjs';
 
 @ApiTags('OAuth-Register')
 @Controller('/oauth/register')
@@ -18,10 +18,10 @@ export class RegisterController {
 
   @ApiBody({
     description: '账号密码注册',
-    type: AccountDto,
+    type: ByAccountDto,
   })
-  @Post('account')
-  async register(@Body() { account, password }: AccountDto): PVoid {
+  @Post('byAccount')
+  async register(@Body() { account, password }: ByAccountDto): PVoid {
     const user = await this.coUserDaoService.findUserByAccount(account);
     baseExceptionCheck(!!user, '该账号已存在');
 
