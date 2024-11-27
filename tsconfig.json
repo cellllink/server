@@ -20,8 +20,8 @@
     "noFallthroughCasesInSwitch": false,
 
     "paths": {
-      "@database": ["libs/database/src"],
-      "@database/*": ["libs/database/src/*"],
+      "@db": ["libs/db/src"],
+      "@db/*": ["libs/db/src/*"],
       "@share": ["libs/share/src"],
       "@share/*": ["libs/share/src/*"]
     }

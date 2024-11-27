@@ -4,9 +4,9 @@ import { Repository } from 'typeorm';
 
 import { CoUser, CoOrganization, CoOrganizationUser, CoTeam, CoTeamUser } from '../structure/core';
 import { ComGroup, ComTag } from '../structure/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { TestDocument } from '@database/structure/test.structure';
+// import { InjectModel } from '@nestjs/mongoose';
+// import { Model } from 'mongoose';
+// import { TestDocument } from '@database/structure/test.structure';
 
 @Injectable()
 export class CoreRepository {

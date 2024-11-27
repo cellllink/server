@@ -18,13 +18,13 @@
         "tsConfigPath": "libs/share/tsconfig.lib.json"
       }
     },
-    "database": {
+    "db": {
       "type": "library",
-      "root": "libs/database",
+      "root": "libs/db",
       "entryFile": "index",
-      "sourceRoot": "libs/database/src",
+      "sourceRoot": "libs/db/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/database/tsconfig.lib.json"
+        "tsConfigPath": "libs/db/tsconfig.lib.json"
       }
     },
 

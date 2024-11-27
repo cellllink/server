@@ -5,7 +5,7 @@ export const configuration = () => ({
   isProdMode: process.env.mode === 'prod',
 
   serveProd: {
-    auth: parseInt(process.env.serve_port_auth),
+    oauth: parseInt(process.env.serve_port_oauth),
   },
 
   db: {
