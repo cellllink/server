@@ -1,7 +1,7 @@
 {
-  "private": true,
   "scripts": {
-    "serve": "cross-env NODE_ENV=dev npx nest start --builder swc --watch",
+    ">>>> serve <<<<": "",
+    "serve:oauth": "cross-env NODE_ENV=dev nest start oauth --builder swc --watch",
     "build:uat": "cross-env NODE_ENV=uat nest build",
     "build:prod": "cross-env NODE_ENV=prod nest build",
     "create-entity": "typeorm-model-generator -h 127.0.0.1 -d cellink -p 3306 -u root -x root -e mysql -o tempEntities --noConfig true --cp snake"

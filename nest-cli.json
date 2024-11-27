@@ -1,11 +1,23 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/main/src",
+
   "compilerOptions": {
-    "webpack": true
+    "webpack": true,
+    "tsConfigPath": "apps/main/tsconfig.app.json"
   },
+
   "projects": {
+    "share": {
+      "type": "library",
+      "root": "libs/share",
+      "entryFile": "index",
+      "sourceRoot": "libs/share/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/share/tsconfig.lib.json"
+      }
+    },
     "database": {
       "type": "library",
       "root": "libs/database",
@@ -14,6 +26,45 @@
       "compilerOptions": {
         "tsConfigPath": "libs/database/tsconfig.lib.json"
       }
+    },
+
+    "main": {
+      "type": "application",
+      "root": "apps/main",
+      "entryFile": "main",
+      "sourceRoot": "apps/main/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/main/tsconfig.app.json"
+      }
+    },
+    "oauth": {
+      "type": "application",
+      "root": "apps/oauth",
+      "entryFile": "main",
+      "sourceRoot": "apps/oauth/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/oauth/tsconfig.app.json"
+      }
+    },
+    "open": {
+      "type": "application",
+      "root": "apps/open",
+      "entryFile": "main",
+      "sourceRoot": "apps/open/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/open/tsconfig.app.json"
+      }
+    },
+    "schedule": {
+      "type": "application",
+      "root": "apps/schedule",
+      "entryFile": "main",
+      "sourceRoot": "apps/schedule/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/schedule/tsconfig.app.json"
+      }
     }
-  }
+  },
+  "monorepo": true,
+  "root": "apps/main"
 }

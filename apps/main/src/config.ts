@@ -13,6 +13,7 @@ export function setSwaager(App: INestApplication) {
 
 export const configuration = () => ({
   mode: process.env.mode,
+  isProdMode: process.env.mode === 'prod',
 
   serve: {
     port: parseInt(process.env.serve_port),
