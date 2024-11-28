@@ -1,5 +1,5 @@
 -- 创建数据库
-CREATE DATABASE celllink DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE cellllink DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 表的命名方式
 -- co_xxx 核心表 (co_user)

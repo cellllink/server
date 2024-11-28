@@ -1,21 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-export class LoginDto {
+export class LoginByPasswordDto {
   @ApiProperty({
     description: '账号',
   })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: '请输入账号' })
   account: string;
 
   @ApiProperty({
     description: '密码',
   })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: '请输入密码' })
   password: string;
 }
 
-export class LoginVo {
+export class LoginByPasswordVo {
   // user: CoUserPo;
   token: string;
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CommonRepository } from './repository';
-import { PComGroupPo, PComGroupPos } from '@database/structure/common';
-import { baseExceptionCheck } from 'src/share/util/exception.util';
-import { PVoid } from 'src/share/type/common.type';
+import { PComGroupPo, PComGroupPos } from '@db/structure/common';
+import { baseExceptionCheck } from '@share/util/exception.util';
+import { PVoid } from '@share/type/common.type';
 
 interface ComGroupDaoServiceImpl {}
 

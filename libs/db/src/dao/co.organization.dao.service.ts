@@ -9,7 +9,7 @@ import {
   PCoUserPos,
   // POrgProductPo,
   // POrgProductPos,
-} from '@database/structure/core';
+} from '@db/structure/core';
 import { CoreRepository } from './repository';
 import dayjs from 'dayjs';
 

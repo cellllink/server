@@ -1,3 +1,3 @@
-export * from './coUser.structure';
-export * from './coOrganization.structure';
-export * from './coTeam.structure';
+export * from './user.structure';
+export * from './organization.structure';
+export * from './team.structure';

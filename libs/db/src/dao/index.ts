@@ -1,3 +1,7 @@
+import { CoOrganizationDaoService } from './co.organization.dao.service';
+import { CoTeamDaoService } from './co.team.dao.service';
+import { CoUserDaoService } from './co.user.dao.service';
+
 export * from './manager.service';
 export * from './repository';
 
