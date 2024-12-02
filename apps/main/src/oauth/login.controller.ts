@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Headers } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { CoUserDaoService } from '@db/dao';
+import { UserDaoService } from '@db/dao';
 import { encryptPasswordBySalt } from '@share/util/cryptogram.util';
 import { baseExceptionCheck } from '@share/util/exception.util';
 import { ByAccountVo } from './dtovo/login.vo';
@@ -11,7 +11,7 @@ import { ByAccountDto } from './dtovo/login.dto';
 @Controller('/oauth/login')
 export class LoginController {
   constructor(
-    private coUserDaoService: CoUserDaoService,
+    private coUserDaoService: UserDaoService,
     private jwtService: JwtService,
   ) {}
 

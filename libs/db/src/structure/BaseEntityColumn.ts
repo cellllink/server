@@ -1,6 +1,7 @@
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { LogicDeleteEnum } from '@share/enmu/logicDelete.enum';
 
-export class BaseEntityColumn {
+export class BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id', comment: '自增id', unsigned: true })
   id: number;
 
@@ -18,5 +19,5 @@ export class BaseEntityPo {
   id: number;
   create_time: Date;
   update_time: Date;
-  logic_delete: 0 | 1;
+  logic_delete: LogicDeleteEnum;
 }
