@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { BaseEntityColumn, BaseEntityPo } from '../baseEntityColumn';
+import { BaseEntity, BaseEntityPo } from '../baseEntityColumn';
 
 /*
 CREATE TABLE `com_group` (
@@ -20,7 +20,7 @@ CREATE TABLE `com_group` (
 */
 
 @Entity('com_group', { schema: 'cellink' })
-export class ComGroup extends BaseEntityColumn {
+export class ComGroup extends BaseEntity {
   @Column('varchar', { name: 'name', comment: '名称', length: 20 })
   name: string;
 

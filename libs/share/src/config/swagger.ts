@@ -18,5 +18,7 @@ export function setupSwaager(App: INestApplication, option?: SwaggerConfigOption
     .addBearerAuth()
     .build();
 
-  SwaggerModule.setup('swagger', App, SwaggerModule.createDocument(App, config));
+  SwaggerModule.setup('swagger', App, SwaggerModule.createDocument(App, config), {
+    jsonDocumentUrl: 'swagger/data.json', // 原始 swagger 数据访问路径
+  });
 }

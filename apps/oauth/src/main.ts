@@ -9,8 +9,13 @@ import { DBModule } from '@db/db.module';
 import { configModuleOptions } from '@share/config/env';
 import { TypeOrmConfigService } from '@share/config/typeorm-config.service';
 
+import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { HttpInterceptor } from '@share/interceptor/http.interceptor';
+import { HttpExceptionFilter } from '../../../libs/share/filter/httpException.filter';
+
+const GlobalModules = [DBModule, JwtModule];
+const BusinessModules = [AuthModule, UserModule];
 
 @Module({
   imports: [
@@ -22,10 +27,8 @@ import { HttpInterceptor } from '@share/interceptor/http.interceptor';
       useClass: TypeOrmConfigService,
     }),
 
-    DBModule,
-    JwtModule,
-
-    UserModule,
+    ...GlobalModules,
+    ...BusinessModules,
   ],
 })
 export class OauthModule {}
@@ -41,6 +44,8 @@ export class OauthModule {}
   App.enableCors();
   // 全局拦截器
   App.useGlobalInterceptors(new HttpInterceptor());
+  // 全局异常过滤器
+  App.useGlobalFilters(new HttpExceptionFilter());
   // 全局 DTO 校验器
   App.useGlobalPipes(new ValidationPipe());
 
