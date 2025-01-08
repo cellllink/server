@@ -9,7 +9,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     response.status(200).json({
       code: exception.getStatus(),
-      messgae: exception.message,
+      message: exception.message,
     });
   }
 }
