@@ -1,4 +1,5 @@
 import { Column, Entity, Index } from 'typeorm';
+
 import { BaseEntity, BaseEntityPo } from '../baseEntityColumn';
 
 /* 数据表
@@ -52,9 +53,6 @@ export class UserPo extends BaseEntityPo {
   phone: string;
   sex: number;
 }
-
-export type PUserPo = Promise<UserPo>;
-export type PUserPos = Promise<UserPo[]>;
 
 export enum SexEnum {
   unknow = 0, // 未知

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { FindOptionsSelect, In } from 'typeorm';
 
 import { CoreRepository } from '@db/repository';
-import { UserEntity, PUserPo, PUserPos } from '@db/structure/core/user.structure';
+import { UserEntity, UserPo } from '@db/structure/core/user.structure';
 import { LogicDeleteEnum } from '@share/enmu/logicDelete.enum';
 
 @Injectable()
@@ -19,14 +19,14 @@ export class UserDao {
   constructor(public coreRepository: CoreRepository) {}
 
   // 通过账户查询用户
-  findUserByAccount(account: string): PUserPo {
+  findUserByAccount(account: string): Promise<UserPo> {
     return this.coreRepository.user.findOne({
       where: { account, logic_delete: LogicDeleteEnum.normal },
     });
   }
 
   // 通过 id 查询用户
-  findUserById(id: number): PUserPo {
+  findUserById(id: number): Promise<UserPo> {
     return this.coreRepository.user.findOne({
       select: this.userSelectBaseOptions,
       where: { id, logic_delete: LogicDeleteEnum.normal },
@@ -34,7 +34,7 @@ export class UserDao {
   }
 
   // 通过 id 查询用户列表
-  findUsersByIds(ids: number[]): PUserPos {
+  findUsersByIds(ids: number[]): Promise<UserPo[]> {
     return this.coreRepository.user.find({
       select: this.userSelectBaseOptions,
       where: { id: In(ids), logic_delete: LogicDeleteEnum.normal },

@@ -1,4 +1,4 @@
-import { datetimeTransformer } from 'src/share/util/column.transformer';
+import { datetimeTransformer } from '@share/util/column.transformer';
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 /**

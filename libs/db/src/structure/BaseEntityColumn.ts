@@ -1,14 +1,20 @@
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
+
 import { LogicDeleteEnum } from '@share/enmu/logicDelete.enum';
+import { datetimeTransformer } from '@share/util/column.transformer';
 
 export class BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id', comment: '自增id', unsigned: true })
   id: number;
 
-  @Column('datetime', { name: 'create_time', comment: '创建时间' })
+  @Column('datetime', {
+    name: 'create_time',
+    comment: '创建时间',
+    transformer: datetimeTransformer,
+  })
   create_time: Date;
 
-  @Column('datetime', { name: 'update_time', comment: '更新时间' })
+  @Column('datetime', { name: 'update_time', comment: '更新时间', transformer: datetimeTransformer })
   update_time: Date;
 
   @Column('tinyint', { name: 'logic_delete', comment: '是否逻辑删除 0:正常 1:删除' })

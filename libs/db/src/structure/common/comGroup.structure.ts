@@ -1,4 +1,5 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
+
 import { BaseEntity, BaseEntityPo } from '../baseEntityColumn';
 
 /*
@@ -12,15 +13,17 @@ CREATE TABLE `com_group` (
   -- 独有字段
   `name` varchar(20) NOT NULL COMMENT '名称',
   `desc` varchar(200) NOT NULL DEFAULT '' COMMENT '描述',
-  `owner_uuid` varchar(32) NOT NULL COMMENT '32位的uuid',
+  `owner_uuid` varchar(32) NOT NULL COMMENT '所属者 - 32位的uuid',
 
   -- 主键 & 索引
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `owner_uuid` (`owner_uuid`)
 ) DEFAULT CHARSET UTF8 COMMENT '公共 - 分组表';
 */
 
+@Index('owner_uuid', ['owner_uuid'], {})
 @Entity('com_group', { schema: 'cellink' })
-export class ComGroup extends BaseEntity {
+export class GroupEntity extends BaseEntity {
   @Column('varchar', { name: 'name', comment: '名称', length: 20 })
   name: string;
 
@@ -31,10 +34,8 @@ export class ComGroup extends BaseEntity {
   owner_uuid: string;
 }
 
-export class ComGroupPo extends BaseEntityPo {
+export class GroupPo extends BaseEntityPo {
   name: string;
   desc: string;
   owner_uuid: string;
 }
-export type PComGroupPo = Promise<ComGroupPo>;
-export type PComGroupPos = Promise<ComGroupPo[]>;

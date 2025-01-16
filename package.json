@@ -2,6 +2,7 @@
   "scripts": {
     ">>>> dev <<<<": "",
     "oauth:dev": "cross-env NODE_ENV=dev nest start oauth --builder swc --watch",
+    "common:dev": "cross-env NODE_ENV=dev nest start common --builder swc --watch",
     ">>>> uat <<<<": "",
     "build:uat": "cross-env NODE_ENV=uat nest build",
     ">>>> prod <<<<": "",

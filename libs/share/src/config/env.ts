@@ -6,6 +6,7 @@ export const configuration = () => ({
 
   serveProd: {
     oauth: parseInt(process.env.serve_port_oauth),
+    common: parseInt(process.env.serve_port_common),
   },
 
   db: {
