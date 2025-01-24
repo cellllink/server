@@ -12,7 +12,7 @@ export function setupSwaager(App: INestApplication, option?: SwaggerConfigOption
   if (App.get(ConfigService).get('isProdMode')) return;
 
   const config = new DocumentBuilder()
-    .setTitle('Cellllink')
+    .setTitle('Cellink')
     .setDescription(option?.description || '-')
     .setVersion(option?.version || '1.0.0')
     .addBearerAuth()

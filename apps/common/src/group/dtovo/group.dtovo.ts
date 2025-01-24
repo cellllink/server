@@ -18,6 +18,26 @@ export class AddDto extends BaseDto {
   desc: string;
 }
 
+export class CopyDto extends BaseDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  id: number;
+}
+
+export class MoveDto extends BaseDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  id: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  start: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  end: number;
+}
+
 export class RemoveDto extends BaseDto {
   @ApiProperty()
   @IsNotEmpty()

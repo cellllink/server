@@ -21,9 +21,18 @@ export class BaseEntity {
   logic_delete: 0 | 1;
 }
 
+export class SoreOrderEntity extends BaseEntity {
+  @Column('double', { name: 'sore_order', comment: '排序优先级' })
+  sore_order?: number;
+}
+
 export class BaseEntityPo {
   id: number;
   create_time: Date;
   update_time: Date;
   logic_delete: LogicDeleteEnum;
+}
+
+export class SoreOrderEntityPo extends BaseEntityPo {
+  sore_order?: number;
 }

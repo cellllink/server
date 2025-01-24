@@ -9,9 +9,18 @@ export class GroupDao {
   constructor(public commonRepository: CommonRepository) {}
 
   // 通过uuid查询分组列表
-  async findByOwnerUUID(owner_uuid: string): Promise<GroupPo[]> {
+  findByOwnerUUID(owner_uuid: string): Promise<GroupPo[]> {
     return this.commonRepository.group.find({
       where: { owner_uuid, logic_delete: LogicDeleteEnum.normal },
+      order: {
+        sore_order: 'DESC', // 数字大的排前面
+      },
+    });
+  }
+
+  findOneById(owner_uuid: string, id: number): Promise<GroupPo> {
+    return this.commonRepository.group.findOne({
+      where: { id, owner_uuid, logic_delete: LogicDeleteEnum.normal },
     });
   }
 

@@ -1,6 +1,6 @@
 import { Column, Entity, Index } from 'typeorm';
 
-import { BaseEntity, BaseEntityPo } from '../baseEntityColumn';
+import { SoreOrderEntity, SoreOrderEntityPo } from '../baseEntityColumn';
 
 /*
 CREATE TABLE `com_group` (
@@ -8,6 +8,7 @@ CREATE TABLE `com_group` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `sore_order` double (9, 8) UNSIGNED COMMENT '排序优先级',
   `logic_delete` tinyint(4) DEFAULT 0 COMMENT '是否逻辑删除 0:正常 1:删除',
 
   -- 独有字段
@@ -23,7 +24,7 @@ CREATE TABLE `com_group` (
 
 @Index('owner_uuid', ['owner_uuid'], {})
 @Entity('com_group', { schema: 'cellink' })
-export class GroupEntity extends BaseEntity {
+export class GroupEntity extends SoreOrderEntity {
   @Column('varchar', { name: 'name', comment: '名称', length: 20 })
   name: string;
 
@@ -34,7 +35,7 @@ export class GroupEntity extends BaseEntity {
   owner_uuid: string;
 }
 
-export class GroupPo extends BaseEntityPo {
+export class GroupPo extends SoreOrderEntityPo {
   name: string;
   desc: string;
   owner_uuid: string;
