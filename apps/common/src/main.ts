@@ -11,7 +11,6 @@ import { HttpInterceptor } from '@share/interceptor/http.interceptor';
 import { HttpExceptionFilter } from '@share/filter/httpException.filter';
 
 import { GroupModule } from './group/group.module';
-import { getBlurMiddleNum } from '@share/util/tool.util';
 
 const GlobalModules = [DBModule];
 const BusinessModules = [GroupModule];
@@ -52,5 +51,3 @@ export class MainModule {}
   await App.listen(Port);
   console.info('服务已启动在端口：' + Port);
 })();
-
-console.log(getBlurMiddleNum(0.888, 0.888));
