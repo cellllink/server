@@ -38,6 +38,16 @@ export class MoveDto extends BaseDto {
   end: number;
 }
 
+export class EditDto extends BaseDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  id: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  name: string;
+}
+
 export class RemoveDto extends BaseDto {
   @ApiProperty()
   @IsNotEmpty()

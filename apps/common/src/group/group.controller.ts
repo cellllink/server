@@ -5,7 +5,7 @@ import { GroupDao } from '@db/dao/common';
 import { GroupPo } from '@db/structure/common';
 import { getBlurMiddleNum } from '@share/util/tool.util';
 
-import { ListDto, AddDto, CopyDto, RemoveDto, MoveDto } from './dtovo/group.dtovo';
+import { ListDto, AddDto, CopyDto, RemoveDto, MoveDto, EditDto } from './dtovo/group.dtovo';
 
 @ApiTags('Group')
 @Controller('/group')
@@ -45,24 +45,18 @@ export class GroupController {
     const currentGroup = await this.groupDao.findOneById(dto.owner_uuid, dto.id);
     currentGroup.sore_order = getBlurMiddleNum(dto.start, dto.end);
     await this.groupDao.commonRepository.group.save(currentGroup);
+  }
 
-    // ---
-    // const list = await this.groupDao.findByOwnerUUID(dto.owner_uuid);
-    // const filterCurrentList = list.filter(i => i.id !== dto.currentId);
+  @Post('/edit')
+  @ApiBody({ description: '' })
+  async edit(@Body() dto: EditDto): Promise<void> {
+    const currentGroup = await this.groupDao.findOneById(dto.owner_uuid, dto.id);
 
-    // const targetGroup = filterCurrentList.find(i => i.id === dto.targetId);
-    // const targetGroupIndex = filterCurrentList.findIndex(i => i.id === dto.targetId);
-
-    // let newSoreOrder: number = null;
-    // if (targetGroupIndex === 0) {
-    //   newSoreOrder = getBlurMiddleNum(1, targetGroup.sore_order);
-    // } else {
-    //   const prevGroup = filterCurrentList[targetGroupIndex - 1];
-    //   newSoreOrder = getBlurMiddleNum(prevGroup.sore_order, targetGroup.sore_order);
-    // }
-
-    // const currentGroup = list.find(i => i.id === dto.currentId);
-    // await this.groupDao.commonRepository.group.save(Object.assign(currentGroup, { sore_order: newSoreOrder }));
+    await this.groupDao.commonRepository.group.save(
+      Object.assign(currentGroup, {
+        name: dto.name,
+      }),
+    );
   }
 
   @Post('/remove')
